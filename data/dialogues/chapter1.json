@@ -1,0 +1,496 @@
+{
+	"bedroom_morning": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Lunes por la mañana. El despertador suena como cada día, pero hoy pesa más que otros.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "La habitación de Cristian está llena de las cosas que le hacen sentir seguro: cómics, figuras, una guitarra vieja.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Fuera de estas paredes, el mundo no es tan amable.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"interact_comic": {
+		"lines": [
+			{
+				"speaker": "Cristian",
+				"text": "Magic Man... el héroe que siempre sabe qué hacer.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Ojalá pudiera ser como él. Nunca tiene miedo, nunca duda.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Bueno... en el número 37 duda un poco. Pero al final siempre hace lo correcto.",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
+	"interact_guitar": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "La guitarra está un poco desafinada, pero Cristian toca unos acordes de memoria.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "La música llena la habitación. Por un momento, todo está bien.",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
+	"interact_poster": {
+		"lines": [
+			{
+				"speaker": "Cristian",
+				"text": "El póster de Magic Man. Me lo regaló la abuela por mi cumple.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "\"Con grandes versos, vienen grandes responsabilidades.\" Eso decía siempre ella.",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
+	"interact_figure": {
+		"lines": [
+			{
+				"speaker": "Cristian",
+				"text": "Mi figura de Magic Man edición limitada. Costó tres meses de paga.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "A veces le hablo antes de ir al cole. Sí, ya sé que es raro.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "... Hoy va a ser un día largo, ¿verdad, Magic Man?",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"kitchen_postit": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "En la nevera hay un post-it con letra apresurada.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "\"Cris, me he ido a trabajar. Tienes el desayuno en la mesa. Bss, mamá.\"",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Cristian desayuna solo. El silencio de la cocina es ensordecedor.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Otra mañana más sin nadie... Bueno, al menos ha dejado ColaCao.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"street_exit": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Cristian sale de casa con cuidado, mirando a ambos lados de la calle.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Si voy por la calle de atrás, quizá no me crucen con ellos...",
+				"emotion": "scared"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "El camino al colegio nunca ha sido tan largo como este curso.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"classroom_pre_attack": {
+		"lines": [
+			{
+				"speaker": "Lewis",
+				"text": "¡Eh, mirad quién ha venido! El friki de los cómics.",
+				"emotion": "mocking"
+			},
+			{
+				"speaker": "Robert",
+				"text": "Jajaja, ¿hoy también traes tus muñequitos, Cristian?",
+				"emotion": "mocking"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "No son muñecos, son figuras de...",
+				"emotion": "scared"
+			},
+			{
+				"speaker": "Lewis",
+				"text": "¿Figuras de qué? ¿De perdedor?",
+				"emotion": "mocking"
+			},
+			{
+				"speaker": "Joan",
+				"text": "Dejadlo, tío, que se va a poner a llorar otra vez.",
+				"emotion": "mocking"
+			},
+			{
+				"speaker": "Lewis",
+				"text": "Que llore. Así aprende a no ser tan raro.",
+				"emotion": "threatening"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Los tres se acercan. Cristian aprieta la mochila contra el pecho.",
+				"emotion": "scared"
+			}
+		]
+	},
+
+	"classroom_post_attack": {
+		"lines": [
+			{
+				"speaker": "Lewis",
+				"text": "Más te vale no decir nada a nadie. ¿Me oyes, friki?",
+				"emotion": "threatening"
+			},
+			{
+				"speaker": "Lewis",
+				"text": "Si dices algo, mañana será peor. Mucho peor.",
+				"emotion": "threatening"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Se van riendo. Cristian se queda solo en el suelo del pasillo.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Le duele el brazo. Le duele el pecho. Pero lo que más duele es otra cosa.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Recoge sus cosas despacio. Nadie ha visto nada. Nadie ha hecho nada.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"bedroom_evening_intro": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Cristian llega a casa arrastrando los pies. Cierra la puerta y se apoya contra ella.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "... Ya estoy en casa.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Nadie contesta. Mamá sigue trabajando. Como siempre.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "La habitación le recibe en silencio, con los brazos abiertos.",
+				"emotion": "neutral"
+			}
+		]
+	},
+
+	"interact_console": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Cristian enciende la consola y juega un rato, pero no consigue concentrarse.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "No me entra... Hoy no puedo ni con esto.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Los pensamientos del día pesan demasiado. Apaga la consola.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"interact_guitar_evening": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Cristian coge la guitarra y empieza a tocar sin pensar.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Los acordes suenan torpes al principio, pero poco a poco fluyen.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "La música envuelve la habitación. Cristian cierra los ojos.",
+				"emotion": "hopeful"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Esto... esto me hace sentir un poco mejor.",
+				"emotion": "hopeful"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "La melodía cura algo por dentro. No todo, pero algo.",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
+	"interact_comic_evening": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Cristian abre el cómic de Magic Man por donde lo dejó.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "A ver... Capítulo 12: \"La fortaleza interior\".",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Las viñetas cobran vida ante sus ojos. Los colores se intensifican.",
+				"emotion": "hopeful"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Magic Man se enfrenta a un villano que usa las palabras como armas.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Las palabras como armas... Eso me suena.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "De repente, las páginas brillan. Cristian siente que el suelo desaparece bajo sus pies...",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
+	"bedroom_evening_diary": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Entre las páginas del cómic, cae algo. Un pequeño cuaderno en blanco.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "¿Qué es esto? No estaba aquí antes...",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "La portada tiene un dibujo que parece hecho a mano: un corazón con alas.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Un diario... ¿Para mí?",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Dentro de la primera página, hay una frase escrita con caligrafía elegante:",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "\"Escribe lo que sientes. Las palabras tienen más poder del que crees.\"",
+				"emotion": "hopeful"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Cristian coge un bolígrafo. Por primera vez en mucho tiempo, siente ganas de escribir.",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
+	"graffiti_1": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Hay algo escrito en la pared, entre los ladrillos viejos.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "\"No estás solo.\"",
+				"emotion": "hopeful"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "... No sé quién ha escrito esto, pero gracias.",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
+	"graffiti_2": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Otro mensaje en la pared, pintado con spray verde.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "\"El arte salva.\"",
+				"emotion": "hopeful"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "El arte salva... Ojalá sea verdad.",
+				"emotion": "neutral"
+			}
+		]
+	},
+
+	"comic_shop_closed": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "La tienda de cómics está cerrada. Un cartel dice: \"Abrimos pronto.\"",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Ojalá estuviera abierta... Seguro que tienen el último de Magic Man.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"kiosk_browse": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Un kiosco con revistas, periódicos y chicles.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Revistas, periódicos... Nada interesante.",
+				"emotion": "neutral"
+			}
+		]
+	},
+
+	"cafe_window": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "A través del cristal se ven personas tomando café tranquilamente.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "La gente ahí dentro parece tan... normal. Tan tranquila.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"instituto_puerta_principal": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "La puerta principal del instituto. Los alumnos entran por aquí.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "No quiero entrar por delante... Me verían todos.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Mejor voy por la puerta de atrás, como siempre.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"grandma_memory_1": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Un recuerdo aparece de golpe, nítido como si fuera ayer.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "La cocina de la abuela. Olor a bizcocho. Luz de tarde entrando por la ventana.",
+				"emotion": "hopeful"
+			},
+			{
+				"speaker": "Abuela",
+				"text": "Todo tiene solución menos la muerte, cariño.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Abuela",
+				"text": "Y mientras haya solución, merece la pena buscarla.",
+				"emotion": "hopeful"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "El recuerdo se desvanece, pero deja algo cálido en el pecho.",
+				"emotion": "hopeful"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Te echo de menos, abuela...",
+				"emotion": "sad"
+			}
+		]
+	}
+}

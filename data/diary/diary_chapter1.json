@@ -1,0 +1,14 @@
+{
+  "chapter": 1,
+  "diary_text": "Amigo mío, necesito volver a hablar contigo. ¿Con quién voy a hacerlo, si no?\n\nHoy ha sido otro día largo y amargo. Esta vez casi me desnudan. ¡Casi me desnudan! ¿Qué he hecho yo para merecer esto?\n\nNo sé si es que molesto a los demás con mi forma de vestir o mi forma de comportarme. Pero hoy apenas me he movido. Me he quedado quieto, sin apenas hacer ruido, intentando desaparecer. Pero no se han olvidado de mí.\n\nLo peor de todo es que yo tampoco consigo olvidarme de ellos.\n\nHay cosas más importantes por los que levantarme cada mañana.",
+  "hope_lines": [
+    {"text": "Todavía tengo ilusión por ella.", "crossed": false, "shake": false},
+    {"text": "Todavía tengo a mis padres.", "crossed": false, "shake": false},
+    {"text": "Todavía tengo a Don Patrick.", "crossed": false, "shake": false},
+    {"text": "Todavía tengo el Certamen.", "crossed": false, "shake": false}
+  ],
+  "lines_to_cross": [],
+  "poem_path": "res://data/poems/poem_chapter1.json",
+  "poem_title": "TODO CAMBIARÁ",
+  "poem_author": "Cristian Reiner"
+}

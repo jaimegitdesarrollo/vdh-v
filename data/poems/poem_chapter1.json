@@ -1,0 +1,70 @@
+{
+  "title": "TODO CAMBIARÁ",
+  "author": "Cristian Reiner",
+  "poem_skeleton": [
+    "Duele, duele, duele el alma entera.",
+    "Cada hora temo que se acerquen, de verdad.",
+    null,
+    "sus golpes y mofas y malas maneras.",
+    "",
+    "Quiera o no quiera, no tiene remedio.",
+    "Avanzo dolido, sin rumbo, está oscuro.",
+    null,
+    "Avanzo temeroso en esta espiral de miedo.",
+    "",
+    "Todo cambiará, todo será distinto,",
+    "mi instinto me grita que sea paciente.",
+    "Todo cambiará, me lo he prometido.",
+    "Seré grande y feliz, llegará el momento.",
+    "",
+    "Todo cambiará, seguro, eso quiero.",
+    "Grito a los cuatro vientos que sabré esperar.",
+    null,
+    "quiero superarlo, aunque siendo sincero,",
+    "",
+    "a veces todo cuesta, y no tengo fuerzas.",
+    null,
+    "Me engaño a mí mismo con mentiras piadosas.",
+    "",
+    "Todo cambiará, sí, algo me espera.",
+    "Pues todo cambiará, todo cambiará."
+  ],
+  "verses": [
+    {
+      "context_before": "Duele, duele, duele el alma entera.\nCada hora temo que se acerquen, de verdad.",
+      "options": [
+        {"text": "Duelen sus risas más que sus puñetazos", "score": 1},
+        {"text": "Duelen, duelen, duelen mucho, sus burlas", "score": 0},
+        {"text": "Nada duele ya, me he acostumbrado", "score": -1}
+      ],
+      "context_after": "sus golpes y mofas y malas maneras."
+    },
+    {
+      "context_before": "Quiera o no quiera, no tiene remedio.\nAvanzo dolido, sin rumbo, está oscuro.",
+      "options": [
+        {"text": "Pero hay una luz, aunque pequeña, al fondo", "score": 1},
+        {"text": "Mi futuro incierto, todo cambiará", "score": 0},
+        {"text": "Mi futuro no existe, solo hay oscuridad", "score": -1}
+      ],
+      "context_after": "Avanzo temeroso en esta espiral de miedo."
+    },
+    {
+      "context_before": "Todo cambiará, seguro, eso quiero.\nGrito a los cuatro vientos que sabré esperar.",
+      "options": [
+        {"text": "Sé que aguantar me hará más fuerte cada día", "score": 1},
+        {"text": "Aguantar más sus gritos, sus golpes e insultos", "score": 0},
+        {"text": "Aguantar... ¿para qué, si nadie viene a ayudarme?", "score": -1}
+      ],
+      "context_after": "quiero superarlo, aunque siendo sincero,"
+    },
+    {
+      "context_before": "No quiero recordar, pero hoy fue demasiado.",
+      "options": [
+        {"text": "Pero sé que estos días pasarán, lo siento", "score": 1},
+        {"text": "Entre varios me desnudan, la clase reía", "score": 0},
+        {"text": "Ya no quiero recordar. Ya no quiero nada.", "score": -1}
+      ],
+      "context_after": "¡Vaya osadía la palabra compañeros!"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+[remap]
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+path="res://.godot/imported/magicman_boss_thewall.ogg-HASH.oggvorbisstr"
+
+[deps]
+source_file="res://assets/audio/music/magicman_boss_thewall.ogg"
+
+[params]
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
