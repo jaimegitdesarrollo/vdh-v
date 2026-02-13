@@ -178,18 +178,20 @@ func _add_furniture(furniture_name: String, pos: Vector2, furniture_size: Vector
 
 func _build_interactables():
 	# Diary on desk — custom interaction
-	var diary := _add_interactable("Diary", OFFSET + Vector2(126, 18), Vector2(10, 8), Color(0.9, 0.8, 0.5),
+	var diary := _add_interactable("Diary", OFFSET + Vector2(126, 18), Vector2(10, 8), Color.TRANSPARENT,
 		"item", "", "")
 	diary.interacted.connect(_on_diary_interacted)
+	_build_diary(OFFSET + Vector2(126, 18))
 
-	# Bed (non-interactable furniture is already added above)
 	# Guitar (just viewable at night, no special effect)
-	_add_interactable("Guitar", OFFSET + Vector2(48, 24), Vector2(8, 16), Color(0.6, 0.35, 0.15),
+	_add_interactable("Guitar", OFFSET + Vector2(48, 16), Vector2(8, 20), Color.TRANSPARENT,
 		"dialogue", "interact_guitar", "")
+	_build_guitar(OFFSET + Vector2(48, 16))
 
 	# Poster
-	_add_interactable("Poster", OFFSET + Vector2(72, 2), Vector2(16, 10), Color(0.85, 0.2, 0.2),
+	_add_interactable("Poster", OFFSET + Vector2(72, 2), Vector2(16, 12), Color.TRANSPARENT,
 		"dialogue", "interact_poster", "")
+	_build_poster(OFFSET + Vector2(72, 2))
 
 
 func _add_interactable(obj_name: String, pos: Vector2, obj_size: Vector2, color: Color,
@@ -235,3 +237,42 @@ func _instance_scene(path: String) -> Node:
 		return packed.instantiate()
 	push_warning("Ch1BedroomNight: Could not load scene: " + path)
 	return Node.new()
+
+
+func _build_guitar(pos: Vector2):
+	var c := Node2D.new(); c.name = "GuitarVisual"; c.position = pos
+	_px(c, 3, 0, 2, 10, Color(0.55, 0.3, 0.12))
+	_px(c, 2, 0, 1, 1, Color(0.75, 0.7, 0.6)); _px(c, 5, 0, 1, 1, Color(0.75, 0.7, 0.6))
+	_px(c, 2, 2, 1, 1, Color(0.75, 0.7, 0.6)); _px(c, 5, 2, 1, 1, Color(0.75, 0.7, 0.6))
+	_px(c, 3, 3, 2, 1, Color(0.8, 0.7, 0.5)); _px(c, 3, 6, 2, 1, Color(0.8, 0.7, 0.5))
+	_px(c, 1, 10, 6, 4, Color(0.7, 0.35, 0.1)); _px(c, 0, 11, 8, 2, Color(0.7, 0.35, 0.1))
+	_px(c, 1, 14, 6, 3, Color(0.65, 0.3, 0.08)); _px(c, 2, 17, 4, 1, Color(0.65, 0.3, 0.08))
+	_px(c, 3, 12, 2, 2, Color(0.2, 0.1, 0.05))
+	_px(c, 4, 1, 1, 13, Color(0.85, 0.8, 0.7, 0.6))
+	add_child(c)
+
+func _build_poster(pos: Vector2):
+	var c := Node2D.new(); c.name = "PosterVisual"; c.position = pos
+	_px(c, 0, 0, 16, 12, Color(0.15, 0.15, 0.3)); _px(c, 1, 1, 14, 10, Color(0.85, 0.2, 0.2))
+	_px(c, 6, 2, 4, 2, Color(0.2, 0.35, 0.9)); _px(c, 5, 4, 6, 3, Color(0.2, 0.35, 0.9))
+	_px(c, 4, 7, 8, 2, Color(0.15, 0.25, 0.75))
+	_px(c, 2, 2, 1, 1, Color(1, 0.95, 0.3)); _px(c, 12, 3, 1, 1, Color(1, 0.95, 0.3))
+	_px(c, 3, 8, 1, 1, Color(1, 0.95, 0.3)); _px(c, 13, 7, 1, 1, Color(1, 0.95, 0.3))
+	_px(c, 2, 10, 12, 1, Color(1, 0.95, 0.3, 0.7))
+	add_child(c)
+
+func _build_diary(pos: Vector2):
+	var c := Node2D.new(); c.name = "DiaryVisual"; c.position = pos
+	_px(c, 0, 0, 10, 8, Color(0.75, 0.6, 0.35))  # cover
+	_px(c, 1, 1, 8, 6, Color(0.9, 0.82, 0.55))    # pages
+	_px(c, 0, 0, 1, 8, Color(0.6, 0.45, 0.25))    # spine
+	_px(c, 2, 2, 6, 1, Color(0.4, 0.3, 0.2, 0.5)) # text line
+	_px(c, 2, 4, 5, 1, Color(0.4, 0.3, 0.2, 0.5)) # text line
+	_px(c, 2, 6, 4, 1, Color(0.4, 0.3, 0.2, 0.5)) # text line
+	add_child(c)
+
+func _px(parent: Node2D, x: int, y: int, w: int, h: int, color: Color):
+	var r := ColorRect.new()
+	r.position = Vector2(x, y); r.size = Vector2(w, h)
+	r.color = color; r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(r)

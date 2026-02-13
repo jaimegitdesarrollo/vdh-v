@@ -175,7 +175,7 @@ func _spawn_intrusive_thought():
 	var text: String = INTRUSIVE_THOUGHTS[randi() % INTRUSIVE_THOUGHTS.size()]
 	var lbl := Label.new()
 	lbl.text = text
-	lbl.add_theme_font_size_override("font_size", 7)
+	lbl.add_theme_font_size_override("font_size", 12)
 	lbl.add_theme_color_override("font_color", Color(0.8, 0.2, 0.2, 0.18))
 	lbl.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 0.08))
 	lbl.add_theme_constant_override("shadow_offset_x", 1)
@@ -274,6 +274,9 @@ func _build_zone1_residential():
 	_wall("Z1_BK4", 560, zy + T, 32, 48, tex_brick)
 	_wall("Z1_BS2", 592, zy + T, 64, 48, tex_stone)
 	_wall("Z1_BK5", 656, zy + T, 224, 48, tex_brick)
+	# Windows on building facades (rows 2-3)
+	for col in [1, 3, 7, 9, 13, 15, 22, 24, 28, 30, 36, 38, 42, 44, 48, 50, 53]:
+		_window("Z1_Win%d" % col, col * T, zy + 2 * T)
 	# Portal strip (row 4) — wall with gap for Cristian's door
 	_wall("Z1_Portal_L", 0, zy + 64, 272, T, tex_dark)
 	_wall("Z1_Portal_R", 288, zy + 64, MAP_W - 288, T, tex_dark)
@@ -296,7 +299,7 @@ func _build_zone1_residential():
 	_fill("Z1_CurbN", 0, zy + 128, MAP_W, T, tex_sidewalk_edge)
 	_fill("Z1_Road", 0, zy + 144, MAP_W, 64, tex_asphalt)
 	_fill("Z1_RLine", 15 * T, zy + 160, 2 * T, T, tex_road_line)
-	_fill("Z1_Cross", 15 * T, zy + 192, 2 * T, T, tex_crosswalk)
+	_fill("Z1_Cross", 15 * T, zy + 144, 2 * T, 64, tex_crosswalk)
 	# Moving cars — upper lane drives RIGHT, lower lane drives LEFT
 	_moving_car("Z1_CR", 5 * T, zy + 148, "red", tex_car_red, 55.0, 1)
 	_moving_car("Z1_CB", 26 * T, zy + 148, "blue", tex_car_blue, 70.0, 1)
@@ -503,9 +506,15 @@ func _build_zone3_commercial():
 	# Roof (visual, no collision)
 	_fill("Z3_RoofL", 0, zy + T, 18 * T, T, tex_roof)
 	_fill("Z3_RoofR", 21 * T, zy + T, MAP_W - 21 * T, T, tex_roof)
-	# Awning (visual, no collision)
-	_fill("Z3_AwningL", 0, zy + 2 * T, 18 * T, T, tex_shop_awning)
-	_fill("Z3_AwningR", 21 * T, zy + 2 * T, MAP_W - 21 * T, T, tex_shop_awning)
+	# Awnings — different color per shop
+	_awning("Z3_Awn_Comic", 0, zy + 2 * T, 5 * T, Color(0.8, 0.2, 0.2))         # Comics - rojo
+	_awning("Z3_Awn_Kiosk", 5 * T, zy + 2 * T, 13 * T, Color(0.2, 0.6, 0.3))    # Kiosco - verde
+	_awning("Z3_Awn_Cafe", 21 * T, zy + 2 * T, 6 * T, Color(0.55, 0.3, 0.15))   # Café - marrón
+	_awning("Z3_Awn_Farma", 27 * T, zy + 2 * T, 5 * T, Color(0.2, 0.7, 0.2))    # Farmacia - verde cruz
+	_awning("Z3_Awn_Pan", 32 * T, zy + 2 * T, 4 * T, Color(0.85, 0.65, 0.2))    # Panadería - dorado
+	_awning("Z3_Awn_Pelu", 36 * T, zy + 2 * T, 4 * T, Color(0.7, 0.3, 0.6))     # Peluquería - morado
+	_awning("Z3_Awn_Zapa", 40 * T, zy + 2 * T, 3 * T, Color(0.3, 0.4, 0.7))     # Zapatería - azul
+	_awning("Z3_Awn_Pape", 43 * T, zy + 2 * T, 12 * T, Color(0.2, 0.55, 0.7))   # Papelería - celeste
 	# Escaparates — LEFT (cols 0-17)
 	_wall("Z3_SW1", 0, zy + 3 * T, 4 * T, T, tex_shop_window)
 	_wall("Z3_SD1", 4 * T, zy + 3 * T, T, T, tex_shop_door)
@@ -515,21 +524,39 @@ func _build_zone3_commercial():
 	# Gap cols 18-20 — entrance from park
 	# Escaparates — RIGHT (cols 21-54)
 	_wall("Z3_SW4", 21 * T, zy + 3 * T, 5 * T, T, tex_shop_window)
-	_wall("Z3_SD4", 26 * T, zy + 3 * T, T, T, tex_shop_door)
-	_wall("Z3_SW5", 27 * T, zy + 3 * T, 7 * T, T, tex_shop_window)
-	_wall("Z3_SD5", 34 * T, zy + 3 * T, T, T, tex_shop_door)
-	_wall("Z3_SW6", 35 * T, zy + 3 * T, 3 * T, T, tex_shop_window)
-	_wall("Z3_SC", 38 * T, zy + 3 * T, 6 * T, T, tex_shop_closed)
-	_wall("Z3_SW7", 44 * T, zy + 3 * T, 11 * T, T, tex_shop_window)
+	_wall("Z3_SD4", 26 * T, zy + 3 * T, T, T, tex_shop_door)   # Café
+	_wall("Z3_SW5", 27 * T, zy + 3 * T, 4 * T, T, tex_shop_window)
+	_wall("Z3_SD5", 31 * T, zy + 3 * T, T, T, tex_shop_door)   # Farmacia
+	_wall("Z3_SW5b", 32 * T, zy + 3 * T, 3 * T, T, tex_shop_window)
+	_wall("Z3_SD6", 35 * T, zy + 3 * T, T, T, tex_shop_door)   # Panadería
+	_wall("Z3_SW6", 36 * T, zy + 3 * T, 2 * T, T, tex_shop_window)
+	_wall("Z3_SD7", 38 * T, zy + 3 * T, T, T, tex_shop_door)   # Peluquería
+	_wall("Z3_SW6b", 39 * T, zy + 3 * T, 2 * T, T, tex_shop_window)
+	_wall("Z3_SD8", 41 * T, zy + 3 * T, T, T, tex_shop_door)   # Zapatería
+	_wall("Z3_SW7", 42 * T, zy + 3 * T, 4 * T, T, tex_shop_window)
+	_wall("Z3_SD9", 46 * T, zy + 3 * T, T, T, tex_shop_door)   # Papelería
+	_wall("Z3_SW8", 47 * T, zy + 3 * T, 8 * T, T, tex_shop_window)
 	# Fachadas (row 4) — with gap
 	_wall("Z3_FacL", 0, zy + 4 * T, 18 * T, T, tex_shop_front)
-	_wall("Z3_FacM", 21 * T, zy + 4 * T, 17 * T, T, tex_shop_front)
-	_wall("Z3_FacC", 38 * T, zy + 4 * T, 6 * T, T, tex_shop_closed)
-	_wall("Z3_FacR", 44 * T, zy + 4 * T, MAP_W - 44 * T, T, tex_shop_front)
+	_wall("Z3_FacR", 21 * T, zy + 4 * T, MAP_W - 21 * T, T, tex_shop_front)
 	# Interactable shop doors (accessible from sidewalk, taller hitbox)
 	_dialogue_area("Z3_ComicDoor", 4 * T, zy + 5 * T, T, 2 * T, "comic_shop_closed")
 	_dialogue_area("Z3_Kiosk", 12 * T, zy + 5 * T, T, 2 * T, "kiosk_browse")
 	_dialogue_area("Z3_Cafe", 26 * T, zy + 5 * T, T, 2 * T, "cafe_window")
+	_dialogue_area("Z3_Farmacia", 31 * T, zy + 5 * T, T, 2 * T, "farmacia_closed")
+	_dialogue_area("Z3_Panaderia", 35 * T, zy + 5 * T, T, 2 * T, "panaderia_closed")
+	_dialogue_area("Z3_Peluqueria", 38 * T, zy + 5 * T, T, 2 * T, "peluqueria_closed")
+	_dialogue_area("Z3_Zapateria", 41 * T, zy + 5 * T, T, 2 * T, "zapateria_closed")
+	_dialogue_area("Z3_Papeleria", 46 * T, zy + 5 * T, T, 2 * T, "papeleria_closed")
+	# Shop name labels on awning
+	_shop_label("Z3_LblComic", 2 * T, zy + 2 * T + 2, "COMICS")
+	_shop_label("Z3_LblKiosk", 10 * T, zy + 2 * T + 2, "KIOSCO")
+	_shop_label("Z3_LblCafe", 23 * T, zy + 2 * T + 2, "CAFETERIA")
+	_shop_label("Z3_LblFarma", 29 * T, zy + 2 * T + 2, "FARMACIA")
+	_shop_label("Z3_LblPan", 34 * T, zy + 2 * T + 2, "PANADERIA")
+	_shop_label("Z3_LblPelu", 37 * T, zy + 2 * T + 2, "PELUQUERIA")
+	_shop_label("Z3_LblZapa", 40 * T, zy + 2 * T + 2, "ZAPATOS")
+	_shop_label("Z3_LblPape", 44 * T, zy + 2 * T + 2, "PAPELERIA")
 
 	# --- ACERA NORTE (rows 5-7) ---
 	for c in [2, 11, 19, 27, 34, 43, 49]:
@@ -541,7 +568,7 @@ func _build_zone3_commercial():
 	_fill("Z3_CurbN", 0, zy + 8 * T, MAP_W, T, tex_sidewalk_edge)
 	_fill("Z3_Road", 0, zy + 9 * T, MAP_W, 3 * T, tex_asphalt)
 	_fill("Z3_RLine", 15 * T, zy + 10 * T, 2 * T, T, tex_road_line)
-	_fill("Z3_Cross", 15 * T, zy + 11 * T, 2 * T, T, tex_crosswalk)
+	_fill("Z3_Cross", 15 * T, zy + 9 * T, 2 * T, 3 * T, tex_crosswalk)
 	# Moving cars — upper lane RIGHT, lower lane LEFT
 	_moving_car("Z3_CR", 7 * T, zy + 9 * T + 4, "red", tex_car_red, 60.0, 1)
 	_moving_car("Z3_CB", 29 * T, zy + 10 * T + 4, "blue", tex_car_blue, 45.0, -1)
@@ -597,6 +624,19 @@ func _build_zone4_institute_exterior():
 	# --- LATERAL DERECHO (fence continues right side) ---
 	_wall("Z4_FenSide", 45 * T, zy + 6 * T, 10 * T, 6 * T, tex_fence)
 
+	# --- EDIFICIO INSTITUTO (muro trasero con puerta) ---
+	# Wall behind the fence on the right, with windows
+	_wall("Z4_InstWallT", 45 * T, zy + 6 * T, 10 * T, T, tex_grey)
+	_wall("Z4_InstWallL", 44 * T, zy + 7 * T, T, 5 * T, tex_grey)  # left side wall
+	_wall("Z4_InstWallR", 45 * T, zy + 7 * T, 10 * T, 5 * T, tex_grey) # main building
+	# Windows on institute wall
+	_window("Z4_InstWin1", 46 * T, zy + 7 * T)
+	_window("Z4_InstWin2", 49 * T, zy + 7 * T)
+	_window("Z4_InstWin3", 52 * T, zy + 7 * T)
+	_window("Z4_InstWin4", 46 * T, zy + 9 * T)
+	_window("Z4_InstWin5", 49 * T, zy + 9 * T)
+	_window("Z4_InstWin6", 52 * T, zy + 9 * T)
+
 	# --- VEGETACIÓN ---
 	_veg_bush("Z4_UrbanTree1", 2 * T, zy + 7 * T, veg_urban_tree)
 	_veg_bush("Z4_UrbanTree2", 12 * T, zy + 7 * T, veg_urban_tree)
@@ -608,7 +648,7 @@ func _build_zone4_institute_exterior():
 	_veg_bush("Z4_Bush1", 2 * T, zy + 9 * T, veg_bush_dense)
 	_veg_bush("Z4_Bush2", 3 * T, zy + 9 * T, veg_bush_dense)
 
-	# --- PUERTA TRASERA (row 10, col 44 → classroom) ---
+	# --- PUERTA TRASERA (row 10, col 44, IN the wall) ---
 	_door("Z4_BackDoor", 44 * T, zy + 10 * T, T, T, tex_door_open,
 		"res://scenes/chapters/chapter1/ch1_classroom.tscn")
 
@@ -625,7 +665,7 @@ func _build_zone4_institute_exterior():
 	lbl.name = "Z4_InstSign"
 	lbl.text = "INSTITUTO PÚBLICO"
 	lbl.position = Vector2(22 * T, zy + 3 * T - 6)
-	lbl.add_theme_font_size_override("font_size", 8)
+	lbl.add_theme_font_size_override("font_size", 11)
 	lbl.add_theme_color_override("font_color", Color(0.8, 0.75, 0.65))
 	add_child(lbl)
 
@@ -958,7 +998,7 @@ func _door(n: String, x: int, y: int, w: int, h: int, tex: Texture2D, target: St
 	c.shape = s; d.add_child(c)
 	var lbl := Label.new()
 	lbl.text = "[E] Entrar"
-	lbl.add_theme_font_size_override("font_size", 8)
+	lbl.add_theme_font_size_override("font_size", 11)
 	lbl.add_theme_color_override("font_color", Color(1, 1, 1, 0.7))
 	lbl.position = Vector2(-w / 2.0, h / 2.0 + 2)
 	d.add_child(lbl)
@@ -1024,7 +1064,7 @@ func _flash(n: String, x: int, y: int, sz: Vector2, phrase: String, one_shot: bo
 func _arrow(n: String, x: int, y: int, text: String):
 	var l := Label.new()
 	l.name = n; l.text = text; l.position = Vector2(x, y)
-	l.add_theme_font_size_override("font_size", 8)
+	l.add_theme_font_size_override("font_size", 11)
 	l.add_theme_color_override("font_color", Color(1, 0.9, 0.3, 0.9))
 	l.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.7))
 	l.add_theme_constant_override("shadow_offset_x", 1)
@@ -1034,3 +1074,59 @@ func _arrow(n: String, x: int, y: int, text: String):
 	var tw := create_tween().set_loops()
 	tw.tween_property(l, "position:y", float(y - 3), 0.8).set_trans(Tween.TRANS_SINE)
 	tw.tween_property(l, "position:y", float(y + 3), 0.8).set_trans(Tween.TRANS_SINE)
+
+
+## Window decoration on building facade (no collision).
+func _window(n: String, x: int, y: int):
+	var container := Node2D.new()
+	container.name = n; container.position = Vector2(x, y)
+	# Window frame
+	var frame := ColorRect.new()
+	frame.position = Vector2(2, 2); frame.size = Vector2(12, 12)
+	frame.color = Color(0.5, 0.55, 0.65)
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	container.add_child(frame)
+	# Glass
+	var glass := ColorRect.new()
+	glass.position = Vector2(3, 3); glass.size = Vector2(10, 10)
+	glass.color = Color(0.4, 0.55, 0.7, 0.7)
+	glass.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	container.add_child(glass)
+	# Cross divider
+	var h_div := ColorRect.new()
+	h_div.position = Vector2(3, 7); h_div.size = Vector2(10, 1)
+	h_div.color = Color(0.5, 0.55, 0.65)
+	h_div.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	container.add_child(h_div)
+	var v_div := ColorRect.new()
+	v_div.position = Vector2(7, 3); v_div.size = Vector2(1, 10)
+	v_div.color = Color(0.5, 0.55, 0.65)
+	v_div.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	container.add_child(v_div)
+	container.z_index = 1
+	add_child(container)
+
+
+## Colored awning (no collision, decorative).
+func _awning(n: String, x: int, y: int, w: int, color: Color):
+	var r := ColorRect.new()
+	r.name = n; r.color = color
+	r.position = Vector2(x, y); r.size = Vector2(w, T)
+	r.z_index = -1
+	add_child(r)
+	# Stripe detail (lighter bar at bottom)
+	var stripe := ColorRect.new()
+	stripe.name = n + "_S"; stripe.color = color.lightened(0.3)
+	stripe.position = Vector2(x, y + T - 3); stripe.size = Vector2(w, 3)
+	stripe.z_index = -1
+	add_child(stripe)
+
+
+## Shop name label on awning.
+func _shop_label(n: String, x: int, y: int, text: String):
+	var l := Label.new()
+	l.name = n; l.text = text; l.position = Vector2(x, y)
+	l.add_theme_font_size_override("font_size", 7)
+	l.add_theme_color_override("font_color", Color(1, 1, 1, 0.9))
+	l.z_index = 5
+	add_child(l)

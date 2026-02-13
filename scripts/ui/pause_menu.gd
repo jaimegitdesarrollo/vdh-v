@@ -171,7 +171,7 @@ func _create_button(text: String) -> Button:
 	btn.add_theme_color_override("font_color", Color.WHITE)
 	btn.add_theme_color_override("font_hover_color", Color.WHITE)
 	btn.add_theme_color_override("font_pressed_color", Color.WHITE)
-	btn.add_theme_font_size_override("font_size", 8)
+	btn.add_theme_font_size_override("font_size", 11)
 
 	return btn
 

@@ -74,7 +74,7 @@ func _ready():
 	continue_label.offset_right = 100
 	continue_label.offset_top = 25
 	continue_label.offset_bottom = 40
-	continue_label.add_theme_font_size_override("font_size", 8)
+	continue_label.add_theme_font_size_override("font_size", 11)
 	continue_label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1))
 	continue_label.modulate.a = 0.0
 	container.add_child(continue_label)

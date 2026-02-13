@@ -31,13 +31,29 @@ var _next_horn: float = 0.0
 
 
 func _ready():
+	add_to_group("moving_cars")
 	_setup_sprite()
 	_setup_hitbox()
 	_next_horn = randf_range(5.0, 20.0)
 
 
 func _physics_process(delta: float):
-	position.x += car_speed * drive_direction * delta
+	# Check distance to cars ahead in same lane to avoid overlap
+	var speed_mult := 1.0
+	for other in get_tree().get_nodes_in_group("moving_cars"):
+		if other == self:
+			continue
+		# Same lane = same direction and close Y position
+		if other.drive_direction != drive_direction:
+			continue
+		if abs(other.position.y - position.y) > 10:
+			continue
+		# Check if other car is ahead of us
+		var dist: float = (other.position.x - position.x) * drive_direction
+		if dist > 0 and dist < 60:
+			speed_mult = max(dist / 60.0, 0.1)
+
+	position.x += car_speed * drive_direction * speed_mult * delta
 
 	# Wrap around map edges (margin accounts for sprite size x2)
 	if drive_direction > 0 and position.x > map_width + 40:

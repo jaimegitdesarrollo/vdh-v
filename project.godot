@@ -34,8 +34,8 @@ window/stretch/mode="canvas_items"
 
 [gui]
 
-theme/custom_font="res://assets/fonts/PressStart2P-Regular.ttf"
-theme/default_font_size=8
+theme/custom_font="res://assets/fonts/LanaPixel.ttf"
+theme/default_font_size=11
 
 [input]
 

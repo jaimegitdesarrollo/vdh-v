@@ -143,7 +143,7 @@ func _setup_boss():
 	var lives_label = Label.new()
 	lives_label.name = "LivesLabel"
 	lives_label.position = Vector2(4, 4)
-	lives_label.add_theme_font_size_override("font_size", 8)
+	lives_label.add_theme_font_size_override("font_size", 11)
 	lives_label.add_theme_color_override("font_color", Color(0.3, 0.7, 1.0))
 	add_child(lives_label)
 	_update_lives_display()
@@ -152,7 +152,7 @@ func _setup_boss():
 	var score_label = Label.new()
 	score_label.name = "ScoreLabel"
 	score_label.position = Vector2(130, 4)
-	score_label.add_theme_font_size_override("font_size", 8)
+	score_label.add_theme_font_size_override("font_size", 11)
 	score_label.add_theme_color_override("font_color", Color(0.9, 0.85, 0.5))
 	add_child(score_label)
 	_update_score_display()
@@ -161,7 +161,7 @@ func _setup_boss():
 	var name_label = Label.new()
 	name_label.text = "THE WALL"
 	name_label.position = Vector2(248, 2)
-	name_label.add_theme_font_size_override("font_size", 8)
+	name_label.add_theme_font_size_override("font_size", 11)
 	name_label.add_theme_color_override("font_color", Color(0.8, 0.2, 0.2))
 	add_child(name_label)
 
@@ -577,7 +577,7 @@ func _start_countdown():
 	countdown_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	countdown_label.position = Vector2(120, 120)
 	countdown_label.size = Vector2(80, 30)
-	countdown_label.add_theme_font_size_override("font_size", 14)
+	countdown_label.add_theme_font_size_override("font_size", 18)
 	countdown_label.add_theme_color_override("font_color", Color(1.0, 0.95, 0.2))
 	add_child(countdown_label)
 

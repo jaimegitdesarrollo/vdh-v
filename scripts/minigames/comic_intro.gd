@@ -64,14 +64,14 @@ func _setup_ui():
 	panel_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	panel_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	panel_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	panel_label.add_theme_font_size_override("font_size", 8)
+	panel_label.add_theme_font_size_override("font_size", 11)
 	panel_label.add_theme_color_override("font_color", Color.WHITE)
 	add_child(panel_label)
 
 	# Contador
 	counter_label = Label.new()
 	counter_label.position = Vector2(260, 155)
-	counter_label.add_theme_font_size_override("font_size", 8)
+	counter_label.add_theme_font_size_override("font_size", 11)
 	counter_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.7))
 	add_child(counter_label)
 
@@ -79,7 +79,7 @@ func _setup_ui():
 	hint_label = Label.new()
 	hint_label.text = "Pulsa espacio..."
 	hint_label.position = Vector2(110, 160)
-	hint_label.add_theme_font_size_override("font_size", 8)
+	hint_label.add_theme_font_size_override("font_size", 11)
 	hint_label.add_theme_color_override("font_color", Color(0.4, 0.4, 0.6))
 	add_child(hint_label)
 

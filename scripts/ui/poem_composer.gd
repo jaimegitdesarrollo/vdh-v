@@ -50,7 +50,7 @@ func _setup_ui():
 	context_label.size = Vector2(260, 60)
 	context_label.bbcode_enabled = true
 	context_label.fit_content = true
-	context_label.add_theme_font_size_override("normal_font_size", 8)
+	context_label.add_theme_font_size_override("normal_font_size", 11)
 	context_label.add_theme_color_override("default_color", Color(0.2, 0.15, 0.1))
 	paper_panel.add_child(context_label)
 
@@ -59,7 +59,7 @@ func _setup_ui():
 	gap_indicator.name = "GapIndicator"
 	gap_indicator.text = "___________________________________"
 	gap_indicator.position = Vector2(10, 55)
-	gap_indicator.add_theme_font_size_override("font_size", 8)
+	gap_indicator.add_theme_font_size_override("font_size", 11)
 	gap_indicator.add_theme_color_override("font_color", Color(0.5, 0.4, 0.3, 0.5))
 	gap_indicator.visible = false
 	paper_panel.add_child(gap_indicator)
@@ -70,7 +70,7 @@ func _setup_ui():
 	chosen_verse_label.position = Vector2(10, 55)
 	chosen_verse_label.size = Vector2(260, 15)
 	chosen_verse_label.bbcode_enabled = true
-	chosen_verse_label.add_theme_font_size_override("normal_font_size", 8)
+	chosen_verse_label.add_theme_font_size_override("normal_font_size", 11)
 	chosen_verse_label.add_theme_color_override("default_color", Color(0.1, 0.1, 0.4))
 	paper_panel.add_child(chosen_verse_label)
 
@@ -80,7 +80,7 @@ func _setup_ui():
 	after_label.position = Vector2(10, 70)
 	after_label.size = Vector2(260, 30)
 	after_label.bbcode_enabled = true
-	after_label.add_theme_font_size_override("normal_font_size", 8)
+	after_label.add_theme_font_size_override("normal_font_size", 11)
 	after_label.add_theme_color_override("default_color", Color(0.2, 0.15, 0.1))
 	paper_panel.add_child(after_label)
 
@@ -95,7 +95,7 @@ func _setup_ui():
 		var btn = Button.new()
 		btn.name = "Option%s" % ["A", "B", "C"][i]
 		btn.custom_minimum_size = Vector2(260, 14)
-		btn.add_theme_font_size_override("font_size", 8)
+		btn.add_theme_font_size_override("font_size", 11)
 		var btn_style = StyleBoxFlat.new()
 		btn_style.bg_color = Color(0.9, 0.85, 0.75, 1.0)
 		btn_style.border_color = Color(0.6, 0.5, 0.4)
@@ -116,7 +116,7 @@ func _setup_ui():
 	reaction_label.position = Vector2(20, 125)
 	reaction_label.size = Vector2(280, 40)
 	reaction_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	reaction_label.add_theme_font_size_override("font_size", 8)
+	reaction_label.add_theme_font_size_override("font_size", 11)
 	reaction_label.add_theme_color_override("font_color", Color(0.3, 0.25, 0.2))
 	reaction_label.visible = false
 	add_child(reaction_label)

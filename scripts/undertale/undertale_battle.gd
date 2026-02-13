@@ -139,7 +139,7 @@ func _setup_fullscreen_ui():
 		bully_panel.add_child(silhouette)
 		var name_label = Label.new()
 		name_label.text = bully_names[i]
-		name_label.add_theme_font_size_override("font_size", 8)
+		name_label.add_theme_font_size_override("font_size", 11)
 		name_label.add_theme_color_override("font_color", Color.WHITE)
 		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		bully_panel.add_child(name_label)
@@ -221,7 +221,7 @@ func _setup_battle_box(box_pos: Vector2, box_size: Vector2, heart_pos: Vector2,
 	fear_label.name = "FearLabel"
 	fear_label.text = "MIEDO"
 	fear_label.position = hp_pos
-	fear_label.add_theme_font_size_override("font_size", 6)
+	fear_label.add_theme_font_size_override("font_size", 9)
 	fear_label.add_theme_color_override("font_color", Color(0.9, 0.3, 0.3))
 	add_child(fear_label)
 
@@ -255,7 +255,7 @@ func _setup_battle_box(box_pos: Vector2, box_size: Vector2, heart_pos: Vector2,
 	var wave_label = Label.new()
 	wave_label.name = "WaveLabel"
 	wave_label.position = wave_pos
-	wave_label.add_theme_font_size_override("font_size", 6)
+	wave_label.add_theme_font_size_override("font_size", 9)
 	wave_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.6))
 	add_child(wave_label)
 
@@ -325,7 +325,7 @@ func _spawn_projectile():
 	# Text label as the projectile visual
 	var label = Label.new()
 	label.text = insult_text
-	label.add_theme_font_size_override("font_size", 6)
+	label.add_theme_font_size_override("font_size", 9)
 	label.add_theme_color_override("font_color", text_color)
 	# Center the label on the Area2D origin
 	label.position = Vector2(-insult_text.length() * 2.5, -5)
@@ -448,7 +448,7 @@ func _spawn_battle_thought():
 	var text: String = BATTLE_THOUGHTS[randi() % BATTLE_THOUGHTS.size()]
 	var lbl := Label.new()
 	lbl.text = text
-	lbl.add_theme_font_size_override("font_size", 6)
+	lbl.add_theme_font_size_override("font_size", 9)
 	lbl.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3, 0.25))
 	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	lbl.rotation = deg_to_rad(randf_range(-12.0, 12.0))

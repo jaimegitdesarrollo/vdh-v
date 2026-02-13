@@ -74,7 +74,7 @@ theme_override_constants/separation = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 11
 text = "Nombre"
 
 [node name="TextLabel" type="RichTextLabel" parent="DialogueBoxControl/DialogueBox/MarginContainer/HBoxContainer/VBoxContainer"]
@@ -82,7 +82,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/normal_font_size = 11
 text = "Texto de dialogo aqui..."
 fit_content = true
 scroll_active = false
@@ -102,7 +102,7 @@ offset_right = -2.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.8)
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 11
 text = "▼"
 horizontal_alignment = 2
 vertical_alignment = 2

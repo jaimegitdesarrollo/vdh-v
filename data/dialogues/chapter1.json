@@ -492,5 +492,85 @@
 				"emotion": "sad"
 			}
 		]
+	},
+
+	"farmacia_closed": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "La farmacia está cerrada. El cartel de neón está apagado.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Mamá siempre venía aquí a comprar las tiritas cuando me caía.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"panaderia_closed": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "La panadería huele a pan recién hecho, pero tiene la persiana bajada.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "La abuela me traía aquí los domingos a comprar ensaimadas...",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"peluqueria_closed": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Una peluquería con el escaparate lleno de fotos de peinados.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "\"Peluquería Mari\". Aquí me cortaba el pelo de pequeño.",
+				"emotion": "neutral"
+			}
+		]
+	},
+
+	"zapateria_closed": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Una zapatería con zapatos expuestos en el escaparate. Cerrada.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Zapatillas nuevas... Las mías tienen un agujero, pero da igual.",
+				"emotion": "sad"
+			}
+		]
+	},
+
+	"papeleria_closed": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Una papelería con mochilas y cuadernos en el escaparate.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Tienen rotuladores de esos buenos... Para dibujar cómics.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Algún día me los compraré.",
+				"emotion": "hopeful"
+			}
+		]
 	}
 }

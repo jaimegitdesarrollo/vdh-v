@@ -166,25 +166,161 @@ func _add_furniture(furniture_name: String, pos: Vector2, furniture_size: Vector
 func _build_interactables():
 	# Door — bottom center (transition to kitchen)
 	var door_pos := OFFSET + Vector2(ROOM_PX_W / 2.0 - 12, ROOM_PX_H - 6)
-	_add_interactable("Door", door_pos, Vector2(24, 12), Color(0.45, 0.3, 0.15),
+	_add_interactable("Door", door_pos, Vector2(24, 12), Color.TRANSPARENT,
 		"transition", "", "res://scenes/chapters/chapter1/ch1_kitchen.tscn",
 		"res://assets/sprites/tiles/door_open.png")
 
-	# Guitar — left side, near bed
-	_add_interactable("Guitar", OFFSET + Vector2(48, 24), Vector2(8, 16), Color(0.6, 0.35, 0.15),
+	# Guitar — left side, leaning against wall
+	var guitar_pos := OFFSET + Vector2(48, 16)
+	_add_interactable("Guitar", guitar_pos, Vector2(8, 20), Color.TRANSPARENT,
 		"dialogue", "interact_guitar", "")
+	_build_guitar(guitar_pos)
 
 	# Comic book on shelf — right wall area
-	_add_interactable("ComicBook", OFFSET + Vector2(140, 50), Vector2(8, 8), Color(0.9, 0.85, 0.2),
+	var comic_pos := OFFSET + Vector2(140, 50)
+	_add_interactable("ComicBook", comic_pos, Vector2(10, 8), Color.TRANSPARENT,
 		"dialogue", "interact_comic", "")
+	_build_comic(comic_pos)
 
 	# Poster on wall — top wall
-	_add_interactable("Poster", OFFSET + Vector2(72, 2), Vector2(16, 10), Color(0.85, 0.2, 0.2),
+	var poster_pos := OFFSET + Vector2(72, 2)
+	_add_interactable("Poster", poster_pos, Vector2(16, 12), Color.TRANSPARENT,
 		"dialogue", "interact_poster", "")
+	_build_poster(poster_pos)
 
 	# Magic Man figure — on the desk
-	_add_interactable("MagicManFigure", OFFSET + Vector2(128, 12), Vector2(6, 6), Color(0.2, 0.4, 0.9),
+	var figure_pos := OFFSET + Vector2(128, 10)
+	_add_interactable("MagicManFigure", figure_pos, Vector2(6, 10), Color.TRANSPARENT,
 		"dialogue", "interact_figure", "")
+	_build_figure(figure_pos)
+
+	# Console — near the desk
+	var console_pos := OFFSET + Vector2(110, 18)
+	_build_console(console_pos)
+
+
+func _build_guitar(pos: Vector2):
+	var container := Node2D.new()
+	container.name = "GuitarVisual"
+	container.position = pos
+	# Neck (long thin part)
+	_px(container, 3, 0, 2, 10, Color(0.55, 0.3, 0.12))  # brown neck
+	# Tuning pegs
+	_px(container, 2, 0, 1, 1, Color(0.75, 0.7, 0.6))
+	_px(container, 5, 0, 1, 1, Color(0.75, 0.7, 0.6))
+	_px(container, 2, 2, 1, 1, Color(0.75, 0.7, 0.6))
+	_px(container, 5, 2, 1, 1, Color(0.75, 0.7, 0.6))
+	# Frets
+	_px(container, 3, 3, 2, 1, Color(0.8, 0.7, 0.5))
+	_px(container, 3, 6, 2, 1, Color(0.8, 0.7, 0.5))
+	# Body (rounded shape with multiple rects)
+	_px(container, 1, 10, 6, 4, Color(0.7, 0.35, 0.1))  # main body
+	_px(container, 0, 11, 8, 2, Color(0.7, 0.35, 0.1))   # wider middle
+	_px(container, 1, 14, 6, 3, Color(0.65, 0.3, 0.08))   # lower body
+	_px(container, 2, 17, 4, 1, Color(0.65, 0.3, 0.08))   # bottom curve
+	# Sound hole
+	_px(container, 3, 12, 2, 2, Color(0.2, 0.1, 0.05))
+	# Strings (thin line down center)
+	_px(container, 4, 1, 1, 13, Color(0.85, 0.8, 0.7, 0.6))
+	add_child(container)
+
+
+func _build_comic(pos: Vector2):
+	var container := Node2D.new()
+	container.name = "ComicVisual"
+	container.position = pos
+	# Comic book cover
+	_px(container, 0, 0, 10, 8, Color(0.9, 0.85, 0.2))  # yellow cover
+	_px(container, 1, 1, 8, 6, Color(0.95, 0.9, 0.4))    # inner lighter
+	# "M" for Magic Man
+	_px(container, 2, 2, 1, 4, Color(0.2, 0.35, 0.85))   # M left
+	_px(container, 3, 3, 1, 1, Color(0.2, 0.35, 0.85))   # M middle-left
+	_px(container, 4, 4, 1, 1, Color(0.2, 0.35, 0.85))   # M center
+	_px(container, 5, 3, 1, 1, Color(0.2, 0.35, 0.85))   # M middle-right
+	_px(container, 6, 2, 1, 4, Color(0.2, 0.35, 0.85))   # M right
+	# Spine
+	_px(container, 0, 0, 1, 8, Color(0.8, 0.75, 0.15))
+	add_child(container)
+
+
+func _build_poster(pos: Vector2):
+	var container := Node2D.new()
+	container.name = "PosterVisual"
+	container.position = pos
+	# Poster background
+	_px(container, 0, 0, 16, 12, Color(0.15, 0.15, 0.3))  # dark blue bg
+	_px(container, 1, 1, 14, 10, Color(0.85, 0.2, 0.2))    # red inner
+	# Magic Man silhouette (cape shape)
+	_px(container, 6, 2, 4, 2, Color(0.2, 0.35, 0.9))   # head
+	_px(container, 5, 4, 6, 3, Color(0.2, 0.35, 0.9))   # torso+cape
+	_px(container, 4, 7, 8, 2, Color(0.15, 0.25, 0.75)) # cape spread
+	# Stars
+	_px(container, 2, 2, 1, 1, Color(1.0, 0.95, 0.3))
+	_px(container, 12, 3, 1, 1, Color(1.0, 0.95, 0.3))
+	_px(container, 3, 8, 1, 1, Color(1.0, 0.95, 0.3))
+	_px(container, 13, 7, 1, 1, Color(1.0, 0.95, 0.3))
+	# Text bar at bottom
+	_px(container, 2, 10, 12, 1, Color(1.0, 0.95, 0.3, 0.7))
+	add_child(container)
+
+
+func _build_figure(pos: Vector2):
+	var container := Node2D.new()
+	container.name = "FigureVisual"
+	container.position = pos
+	# Base/pedestal
+	_px(container, 1, 8, 4, 2, Color(0.3, 0.3, 0.35))
+	# Legs
+	_px(container, 2, 6, 1, 2, Color(0.2, 0.35, 0.85))
+	_px(container, 4, 6, 1, 2, Color(0.2, 0.35, 0.85))
+	# Body
+	_px(container, 1, 3, 4, 3, Color(0.2, 0.4, 0.9))
+	# Cape (side flare)
+	_px(container, 0, 4, 1, 3, Color(0.7, 0.15, 0.15))
+	_px(container, 5, 4, 1, 3, Color(0.7, 0.15, 0.15))
+	# Head
+	_px(container, 2, 1, 2, 2, Color(0.9, 0.75, 0.6))
+	# Mask
+	_px(container, 2, 1, 2, 1, Color(0.2, 0.35, 0.85))
+	# Arm raised (heroic pose)
+	_px(container, 5, 2, 1, 2, Color(0.2, 0.4, 0.9))
+	_px(container, 5, 1, 1, 1, Color(0.9, 0.75, 0.6))
+	add_child(container)
+
+
+func _build_console(pos: Vector2):
+	var container := Node2D.new()
+	container.name = "ConsoleVisual"
+	container.position = pos
+	# TV/Monitor
+	_px(container, 0, 0, 12, 9, Color(0.15, 0.15, 0.2))  # bezel
+	_px(container, 1, 1, 10, 7, Color(0.1, 0.2, 0.15))    # screen off/dark
+	# Screen glare
+	_px(container, 2, 2, 3, 1, Color(0.15, 0.25, 0.2))
+	# TV stand
+	_px(container, 4, 9, 4, 1, Color(0.2, 0.2, 0.25))
+	# Console box below
+	_px(container, 2, 11, 8, 3, Color(0.12, 0.12, 0.15))
+	# Console detail (power light off, disc slot)
+	_px(container, 3, 12, 1, 1, Color(0.3, 0.1, 0.1))     # power light
+	_px(container, 5, 12, 4, 1, Color(0.08, 0.08, 0.1))    # disc slot
+	# Controller on floor
+	_px(container, 0, 14, 4, 2, Color(0.18, 0.18, 0.22))   # controller body
+	_px(container, 1, 14, 1, 1, Color(0.3, 0.3, 0.4))      # d-pad
+	_px(container, 3, 14, 1, 1, Color(0.2, 0.5, 0.2))      # button
+	# Cable from controller to console
+	_px(container, 4, 14, 1, 1, Color(0.15, 0.15, 0.18))
+	add_child(container)
+
+
+## Pixel art helper — adds a tiny ColorRect to a container.
+func _px(parent: Node2D, x: int, y: int, w: int, h: int, color: Color):
+	var r := ColorRect.new()
+	r.position = Vector2(x, y)
+	r.size = Vector2(w, h)
+	r.color = color
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(r)
 
 
 func _add_interactable(obj_name: String, pos: Vector2, obj_size: Vector2, color: Color,

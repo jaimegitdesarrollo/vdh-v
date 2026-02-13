@@ -148,32 +148,34 @@ func _build_classroom():
 	add_child(seat_marker)
 
 	# --- NPCs: Bullies ---
+	# NPC Y offset: +4 puts center ~16px below desk top → upper body above desk, legs hidden
+	# z_index = -1 so desks render in front of NPC legs
 	# Lewis (red-ish) — front of class
-	npc_lewis = _add_npc_sprite("NPC_Lewis", desk_start + Vector2(3 * desk_spacing.x + 18, 0 * desk_spacing.y + desk_size.y + 4),
+	npc_lewis = _add_npc_sprite("NPC_Lewis", desk_start + Vector2(3 * desk_spacing.x + 18, 0 * desk_spacing.y + 4),
 		"res://assets/sprites/npcs/lewis.png", "Lewis")
 	# Joan (orange) — near Lewis
-	npc_joan = _add_npc_sprite("NPC_Joan", desk_start + Vector2(4 * desk_spacing.x + 18, 0 * desk_spacing.y + desk_size.y + 4),
+	npc_joan = _add_npc_sprite("NPC_Joan", desk_start + Vector2(4 * desk_spacing.x + 18, 0 * desk_spacing.y + 4),
 		"res://assets/sprites/npcs/joan.png", "Joan")
 	# Robert (dark red) — second row
-	npc_robert = _add_npc_sprite("NPC_Robert", desk_start + Vector2(3 * desk_spacing.x + 18, 1 * desk_spacing.y + desk_size.y + 4),
+	npc_robert = _add_npc_sprite("NPC_Robert", desk_start + Vector2(3 * desk_spacing.x + 18, 1 * desk_spacing.y + 4),
 		"res://assets/sprites/npcs/robert.png", "Robert")
 	# Mike (brown) — second row (stays at desk, doesn't approach)
-	_add_npc_sprite("NPC_Mike", desk_start + Vector2(4 * desk_spacing.x + 18, 1 * desk_spacing.y + desk_size.y + 4),
+	_add_npc_sprite("NPC_Mike", desk_start + Vector2(4 * desk_spacing.x + 18, 1 * desk_spacing.y + 4),
 		"res://assets/sprites/npcs/mike.png", "Mike")
 
 	# --- Classmates (from classmates_strip.png — 8 unique characters, 16x24 each) ---
 	# Frame 0=Carlos, 1=Ahmed, 2=Pablo, 3=Wei, 4=Marta, 5=Amina, 6=Sara, 7=Elena
-	_add_classmate("NPC_Carlos", desk_start + Vector2(0 * desk_spacing.x + 18, 0 * desk_spacing.y + desk_size.y + 4), 0)
-	_add_classmate("NPC_Marta", desk_start + Vector2(1 * desk_spacing.x + 18, 0 * desk_spacing.y + desk_size.y + 4), 4)
-	_add_classmate("NPC_Wei", desk_start + Vector2(2 * desk_spacing.x + 18, 0 * desk_spacing.y + desk_size.y + 4), 3)
-	_add_classmate("NPC_Ahmed", desk_start + Vector2(0 * desk_spacing.x + 18, 1 * desk_spacing.y + desk_size.y + 4), 1)
-	_add_classmate("NPC_Sara", desk_start + Vector2(2 * desk_spacing.x + 18, 1 * desk_spacing.y + desk_size.y + 4), 6)
-	_add_classmate("NPC_Pablo", desk_start + Vector2(0 * desk_spacing.x + 18, 3 * desk_spacing.y + desk_size.y + 4), 2)
-	_add_classmate("NPC_Amina", desk_start + Vector2(2 * desk_spacing.x + 18, 3 * desk_spacing.y + desk_size.y + 4), 5)
-	_add_classmate("NPC_Elena", desk_start + Vector2(3 * desk_spacing.x + 18, 3 * desk_spacing.y + desk_size.y + 4), 7)
+	_add_classmate("NPC_Carlos", desk_start + Vector2(0 * desk_spacing.x + 18, 0 * desk_spacing.y + 4), 0)
+	_add_classmate("NPC_Marta", desk_start + Vector2(1 * desk_spacing.x + 18, 0 * desk_spacing.y + 4), 4)
+	_add_classmate("NPC_Wei", desk_start + Vector2(2 * desk_spacing.x + 18, 0 * desk_spacing.y + 4), 3)
+	_add_classmate("NPC_Ahmed", desk_start + Vector2(0 * desk_spacing.x + 18, 1 * desk_spacing.y + 4), 1)
+	_add_classmate("NPC_Sara", desk_start + Vector2(2 * desk_spacing.x + 18, 1 * desk_spacing.y + 4), 6)
+	_add_classmate("NPC_Pablo", desk_start + Vector2(0 * desk_spacing.x + 18, 3 * desk_spacing.y + 4), 2)
+	_add_classmate("NPC_Amina", desk_start + Vector2(2 * desk_spacing.x + 18, 3 * desk_spacing.y + 4), 5)
+	_add_classmate("NPC_Elena", desk_start + Vector2(3 * desk_spacing.x + 18, 3 * desk_spacing.y + 4), 7)
 
 	# --- Lucy (pink/light, in background — back row) ---
-	_add_npc_sprite("NPC_Lucy", desk_start + Vector2(4 * desk_spacing.x + 18, 3 * desk_spacing.y + desk_size.y + 4),
+	_add_npc_sprite("NPC_Lucy", desk_start + Vector2(4 * desk_spacing.x + 18, 3 * desk_spacing.y + 4),
 		"res://assets/sprites/npcs/lucy.png", "Lucy")
 
 	# --- Professor Don Peter placeholder (will "arrive later" — initially invisible) ---
@@ -464,14 +466,14 @@ func _add_npc_sprite(npc_name: String, pos: Vector2, sprite_path: String, label_
 	npc.name = npc_name
 	npc.texture = load(sprite_path)
 	npc.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	# Center the sprite at the same position the old ColorRect(10,14) occupied
 	npc.position = pos + Vector2(5, 7)
+	npc.z_index = 1  # In front of desks
 	add_child(npc)
 
 	if label_text != "":
 		var label := Label.new()
 		label.text = label_text
-		label.add_theme_font_size_override("font_size", 8)
+		label.add_theme_font_size_override("font_size", 11)
 		label.add_theme_color_override("font_color", Color(1, 1, 1, 0.7))
 		label.position = Vector2(-9, -17)
 		npc.add_child(label)
@@ -492,5 +494,6 @@ func _add_classmate(npc_name: String, pos: Vector2, frame_index: int) -> Sprite2
 	npc.texture = atlas
 	npc.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	npc.position = pos + Vector2(8, 12)
+	npc.z_index = 1  # In front of desks
 	add_child(npc)
 	return npc

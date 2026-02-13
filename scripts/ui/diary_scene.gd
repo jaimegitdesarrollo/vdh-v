@@ -44,7 +44,7 @@ func _setup_ui():
 	diary_text_label.position = Vector2(30, 15)
 	diary_text_label.size = Vector2(260, 140)
 	diary_text_label.bbcode_enabled = true
-	diary_text_label.add_theme_font_size_override("normal_font_size", 8)
+	diary_text_label.add_theme_font_size_override("normal_font_size", 11)
 	diary_text_label.add_theme_color_override("default_color", Color(0.2, 0.15, 0.1))
 	diary_text_label.scroll_active = true
 	add_child(diary_text_label)
@@ -73,7 +73,7 @@ func _setup_ui():
 	continue_hint.name = "ContinueHint"
 	continue_hint.text = "Pulsa espacio para continuar..."
 	continue_hint.position = Vector2(80, 168)
-	continue_hint.add_theme_font_size_override("font_size", 8)
+	continue_hint.add_theme_font_size_override("font_size", 11)
 	continue_hint.add_theme_color_override("font_color", Color(0.5, 0.4, 0.3, 0.6))
 	continue_hint.visible = false
 	add_child(continue_hint)
@@ -122,7 +122,7 @@ func _show_hope_list():
 	var title = Label.new()
 	title.text = "Hay cosas más importantes por los que levantarme cada mañana."
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	title.add_theme_font_size_override("font_size", 8)
+	title.add_theme_font_size_override("font_size", 11)
 	title.add_theme_color_override("font_color", Color(0.3, 0.25, 0.2))
 	hope_container.add_child(title)
 
@@ -134,7 +134,7 @@ func _show_hope_list():
 		var line = hope_lines[i]
 		var label = Label.new()
 		label.text = line["text"]
-		label.add_theme_font_size_override("font_size", 8)
+		label.add_theme_font_size_override("font_size", 11)
 		label.add_theme_color_override("font_color", Color(0.15, 0.3, 0.15))
 		hope_container.add_child(label)
 

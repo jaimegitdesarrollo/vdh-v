@@ -109,7 +109,7 @@ func _show_notification(text: String):
 	var label = Label.new()
 	label.text = text
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", 8)
+	label.add_theme_font_size_override("font_size", 11)
 	label.add_theme_color_override("font_color", Color.WHITE)
 	label.position = Vector2(-60, -20)
 	add_child(label)

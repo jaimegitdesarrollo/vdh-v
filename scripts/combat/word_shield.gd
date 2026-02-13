@@ -22,6 +22,7 @@ var shadow_fade: bool = false
 var shadow_fade_time: float = 3.0
 var light_words: Array = []
 var shadow_words: Array = []
+var background_phrases: Array = []
 
 # --- Game state ---
 var health: float = 100.0
@@ -30,6 +31,9 @@ var collected_words: Array[String] = []
 var is_active: bool = false
 var _spawn_timer: float = 0.0
 var _auto_lose_elapsed: float = 0.0
+var _bg_phrase_timer: float = 0.0
+const BG_PHRASE_MIN_INTERVAL := 5.0
+const BG_PHRASE_MAX_INTERVAL := 10.0
 
 # --- Player ---
 var player_heart: Sprite2D
@@ -48,7 +52,6 @@ var health_bar_fill: ColorRect
 var shield_bar_fill: ColorRect
 var shield_label: Label
 var health_label: Label
-var words_container: VBoxContainer
 var floating_words: Array[Label] = []
 
 # --- Light word styles per chapter range ---
@@ -80,6 +83,7 @@ func start_battle(ch: int = 1):
 	floating_words.clear()
 	_spawn_timer = 0.0
 	_auto_lose_elapsed = 0.0
+	_bg_phrase_timer = randf_range(BG_PHRASE_MIN_INTERVAL, BG_PHRASE_MAX_INTERVAL)
 	is_invincible = false
 	visible = true
 	get_tree().paused = true
@@ -112,6 +116,7 @@ func _load_chapter(ch: int):
 	shadow_fade_time = data.get("shadow_fade_time", 3.0)
 	light_words = data.get("light_words", [])
 	shadow_words = data.get("shadow_words", [])
+	background_phrases = data.get("background_phrases", [])
 
 
 # =============================================================================
@@ -142,9 +147,6 @@ func _setup_fullscreen():
 	# UI bars at bottom
 	_setup_bars(Vector2(30, 140), Vector2(260, 140))
 
-	# Collected words panel (right side)
-	_setup_words_panel(Vector2(240, 22))
-
 
 func _setup_split_screen():
 	# Black background only on bottom half
@@ -171,9 +173,6 @@ func _setup_split_screen():
 
 	# UI bars
 	_setup_bars(Vector2(40, 156), Vector2(220, 156))
-
-	# Collected words panel
-	_setup_words_panel(Vector2(230, 94))
 
 
 func _setup_battle_area(box_pos: Vector2, box_size: Vector2):
@@ -210,12 +209,12 @@ func _setup_bars(hp_pos: Vector2, shield_pos: Vector2):
 	health_label.name = "HealthLabel"
 	health_label.text = "VIDA"
 	health_label.position = hp_pos
-	health_label.add_theme_font_size_override("font_size", 6)
+	health_label.add_theme_font_size_override("font_size", 9)
 	health_label.add_theme_color_override("font_color", Color(0.9, 0.3, 0.3))
 	add_child(health_label)
 
 	var hp_bar_bg = ColorRect.new()
-	hp_bar_bg.position = Vector2(hp_pos.x + 28, hp_pos.y + 2)
+	hp_bar_bg.position = Vector2(hp_pos.x + 32, hp_pos.y + 2)
 	hp_bar_bg.size = Vector2(60, 7)
 	hp_bar_bg.color = Color(0.15, 0.15, 0.15)
 	add_child(hp_bar_bg)
@@ -232,7 +231,7 @@ func _setup_bars(hp_pos: Vector2, shield_pos: Vector2):
 	shield_label.name = "ShieldLabel"
 	shield_label.text = "ESCUDO"
 	shield_label.position = Vector2(shield_pos.x - 42, shield_pos.y)
-	shield_label.add_theme_font_size_override("font_size", 6)
+	shield_label.add_theme_font_size_override("font_size", 9)
 	shield_label.add_theme_color_override("font_color", shield_color)
 	add_child(shield_label)
 
@@ -250,13 +249,6 @@ func _setup_bars(hp_pos: Vector2, shield_pos: Vector2):
 	add_child(shield_bar_fill)
 
 
-func _setup_words_panel(pos: Vector2):
-	words_container = VBoxContainer.new()
-	words_container.name = "CollectedWords"
-	words_container.position = pos
-	words_container.add_theme_constant_override("separation", 1)
-	add_child(words_container)
-
 
 # =============================================================================
 # GAME LOOP
@@ -270,6 +262,7 @@ func _physics_process(delta):
 	_update_invincibility(delta)
 	_move_and_check_words(delta)
 	_spawn_tick(delta)
+	_bg_phrase_tick(delta)
 
 	if auto_lose:
 		_auto_lose_elapsed += delta
@@ -304,6 +297,36 @@ func _spawn_tick(delta):
 	if _spawn_timer <= 0:
 		_spawn_word()
 		_spawn_timer = spawn_interval
+
+
+func _bg_phrase_tick(delta):
+	if background_phrases.size() == 0:
+		return
+	_bg_phrase_timer -= delta
+	if _bg_phrase_timer <= 0:
+		_spawn_bg_phrase()
+		_bg_phrase_timer = randf_range(BG_PHRASE_MIN_INTERVAL, BG_PHRASE_MAX_INTERVAL)
+
+
+func _spawn_bg_phrase():
+	var text: String = background_phrases[randi() % background_phrases.size()]
+	var label = Label.new()
+	label.text = text
+	label.add_theme_font_size_override("font_size", 14)
+	label.add_theme_color_override("font_color", Color(0.55, 0.5, 0.65))
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	# Top of screen, centered horizontally
+	label.position = Vector2(80, 4)
+	label.size = Vector2(160, 12)
+	add_child(label)
+	# Fade in → hold → fade out
+	label.modulate.a = 0.0
+	var tw = create_tween()
+	tw.tween_property(label, "modulate:a", 1.0, 0.8)
+	tw.tween_interval(2.5)
+	tw.tween_property(label, "modulate:a", 0.0, 1.0)
+	tw.tween_callback(label.queue_free)
 
 
 func _move_and_check_words(delta):
@@ -414,11 +437,11 @@ func _spawn_word():
 
 func _get_word_font_size(is_light: bool) -> int:
 	if is_light:
-		return 7
+		return 10
 	# Shadow words get bigger in later chapters
 	if chapter >= 5:
-		return 8
-	return 7
+		return 11
+	return 10
 
 
 func _get_word_color(is_light: bool) -> Color:
@@ -457,7 +480,6 @@ func _on_word_touched(word: Label, is_light: bool):
 		shield_power = min(shield_power, 100.0)
 		collected_words.append(text)
 		_update_shield_display()
-		_add_collected_word_label(text)
 		AudioManager.play_sfx("sfx_pong_hit_player")
 
 		# Cap 7: light words also hurt
@@ -470,12 +492,17 @@ func _on_word_touched(word: Label, is_light: bool):
 			_end_battle(true)
 			return
 	else:
-		# Shadow damage (reduced by shield protection)
+		# Shadow damage: first drains shield, then health
 		if is_invincible:
 			return
-		var protection_ratio := (shield_power / 100.0) * max_protection
-		var damage := 15.0 * (1.0 - protection_ratio)
-		health -= damage
+		var damage := 15.0
+		if shield_power > 0:
+			var shield_absorb: float = min(shield_power, damage)
+			shield_power -= shield_absorb
+			damage -= shield_absorb
+			_update_shield_display()
+		if damage > 0:
+			health -= damage
 		_flash_player_hurt()
 		is_invincible = true
 		invincibility_timer = INVINCIBILITY_DURATION
@@ -493,20 +520,6 @@ func _flash_player_hurt():
 	var tw = create_tween()
 	tw.tween_property(player_heart, "modulate", Color.WHITE, 0.2)
 
-
-func _add_collected_word_label(text: String):
-	if not words_container:
-		return
-	var lbl = Label.new()
-	lbl.text = "~ " + text
-	lbl.add_theme_font_size_override("font_size", 5)
-	lbl.add_theme_color_override("font_color", shield_color.lightened(0.3))
-	words_container.add_child(lbl)
-
-	# Fade in
-	lbl.modulate.a = 0.0
-	var tw = create_tween()
-	tw.tween_property(lbl, "modulate:a", 1.0, 0.3)
 
 
 # =============================================================================

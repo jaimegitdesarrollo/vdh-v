@@ -1,12 +1,12 @@
 {
     "chapter": 1,
-    "light_ratio": 0.7,
-    "spawn_interval": 1.2,
+    "light_ratio": 0.35,
+    "spawn_interval": 1.0,
     "base_speed": 40,
     "shield_color": "#FFD700",
     "shield_glow": true,
     "max_protection": 1.0,
-    "required_light_words": 4,
+    "required_light_words": 12,
     "auto_lose": false,
     "shadow_fade": false,
     "light_words": [
@@ -23,6 +23,22 @@
         "Raro",
         "Cállate",
         "Feo",
-        "Bicho"
+        "Bicho",
+        "Inútil",
+        "Payaso",
+        "Perdedor",
+        "Cobarde",
+        "Llorica",
+        "Estúpido"
+    ],
+    "background_phrases": [
+        "¿Por qué siempre a mí?",
+        "No quiero ir al cole...",
+        "Ojalá fuera invisible",
+        "¿Qué he hecho mal?",
+        "Nadie me ayuda...",
+        "Quiero irme a casa",
+        "No soy raro...",
+        "Solo quiero tener amigos"
     ]
 }

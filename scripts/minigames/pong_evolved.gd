@@ -104,7 +104,7 @@ func _setup_game():
 	phase_label = Label.new()
 	phase_label.name = "PhaseLabel"
 	phase_label.position = Vector2(4, 4)
-	phase_label.add_theme_font_size_override("font_size", 8)
+	phase_label.add_theme_font_size_override("font_size", 11)
 	phase_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.8))
 	add_child(phase_label)
 	_update_phase_display()

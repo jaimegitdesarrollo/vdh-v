@@ -62,7 +62,7 @@ func _show_intro_panel():
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.position = Vector2(30, 30)
 		label.size = Vector2(260, 120)
-		label.add_theme_font_size_override("font_size", 8)
+		label.add_theme_font_size_override("font_size", 11)
 		label.add_theme_color_override("font_color", Color.WHITE)
 		container.add_child(label)
 

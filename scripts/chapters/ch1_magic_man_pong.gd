@@ -155,7 +155,7 @@ func _show_victory():
 	subtitle.position = Vector2(20, 90)
 	subtitle.size = Vector2(280, 40)
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	subtitle.add_theme_font_size_override("font_size", 8)
+	subtitle.add_theme_font_size_override("font_size", 11)
 	subtitle.add_theme_color_override("font_color", Color(0.7, 0.8, 1.0))
 	victory_screen.add_child(subtitle)
 
@@ -164,7 +164,7 @@ func _show_victory():
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	hint.position = Vector2(80, 150)
 	hint.size = Vector2(160, 20)
-	hint.add_theme_font_size_override("font_size", 8)
+	hint.add_theme_font_size_override("font_size", 11)
 	hint.add_theme_color_override("font_color", Color(0.5, 0.5, 0.7))
 	victory_screen.add_child(hint)
 

@@ -237,7 +237,7 @@ func _setup_interact_indicator():
 	interact_indicator = Label.new()
 	interact_indicator.text = "E"
 	interact_indicator.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	interact_indicator.add_theme_font_size_override("font_size", 8)
+	interact_indicator.add_theme_font_size_override("font_size", 11)
 	interact_indicator.add_theme_color_override("font_color", Color.WHITE)
 	interact_indicator.add_theme_color_override("font_outline_color", Color.BLACK)
 	interact_indicator.add_theme_constant_override("outline_size", 2)

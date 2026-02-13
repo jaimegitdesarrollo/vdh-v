@@ -171,32 +171,32 @@ func _add_furniture(furniture_name: String, pos: Vector2, furniture_size: Vector
 
 func _build_interactables():
 	# Guitar — dialogue + heal (custom signal handling)
-	var guitar := _add_interactable("Guitar", OFFSET + Vector2(48, 24), Vector2(8, 16), Color(0.6, 0.35, 0.15),
+	var guitar := _add_interactable("Guitar", OFFSET + Vector2(48, 16), Vector2(8, 20), Color.TRANSPARENT,
 		"dialogue", "interact_guitar_evening", "")
 	guitar.interacted.connect(_on_guitar_interacted)
-	# We also need to detect when the dialogue-type interactable fires.
-	# Since interaction_type is "dialogue", the interactable calls DialogueManager directly.
-	# We hook into the Area2D's interact() being called indirectly via monitoring.
-	# Instead, we connect to the guitar being entered by the interaction area.
-	# Simpler approach: override by watching dialogue starts.
 	_watch_dialogue_for_heal("interact_guitar_evening")
+	_build_guitar(OFFSET + Vector2(48, 16))
 
 	# Console — dialogue only
-	_add_interactable("Console", OFFSET + Vector2(120, 40), Vector2(16, 12), Color(0.2, 0.2, 0.2),
+	_add_interactable("Console", OFFSET + Vector2(110, 18), Vector2(12, 16), Color.TRANSPARENT,
 		"dialogue", "interact_console", "")
+	_build_console(OFFSET + Vector2(110, 18))
 
 	# Comic book — dialogue, then transition to Magic Man
-	var comic := _add_interactable("ComicBook", OFFSET + Vector2(140, 50), Vector2(8, 8), Color(0.9, 0.85, 0.2),
+	var comic := _add_interactable("ComicBook", OFFSET + Vector2(140, 50), Vector2(10, 8), Color.TRANSPARENT,
 		"dialogue", "interact_comic_evening", "")
 	_watch_dialogue_for_comic("interact_comic_evening")
+	_build_comic(OFFSET + Vector2(140, 50))
 
 	# Poster (still viewable)
-	_add_interactable("Poster", OFFSET + Vector2(72, 2), Vector2(16, 10), Color(0.85, 0.2, 0.2),
+	_add_interactable("Poster", OFFSET + Vector2(72, 2), Vector2(16, 12), Color.TRANSPARENT,
 		"dialogue", "interact_poster", "")
+	_build_poster(OFFSET + Vector2(72, 2))
 
 	# Magic Man figure
-	_add_interactable("MagicManFigure", OFFSET + Vector2(128, 12), Vector2(6, 6), Color(0.2, 0.4, 0.9),
+	_add_interactable("MagicManFigure", OFFSET + Vector2(128, 10), Vector2(6, 10), Color.TRANSPARENT,
 		"dialogue", "interact_figure", "")
+	_build_figure(OFFSET + Vector2(128, 10))
 
 
 ## Watch for a specific dialogue to start, then connect heal on its end.
@@ -261,3 +261,60 @@ func _instance_scene(path: String) -> Node:
 		return packed.instantiate()
 	push_warning("Ch1BedroomEvening: Could not load scene: " + path)
 	return Node.new()
+
+
+func _build_guitar(pos: Vector2):
+	var c := Node2D.new(); c.name = "GuitarVisual"; c.position = pos
+	_px(c, 3, 0, 2, 10, Color(0.55, 0.3, 0.12))
+	_px(c, 2, 0, 1, 1, Color(0.75, 0.7, 0.6)); _px(c, 5, 0, 1, 1, Color(0.75, 0.7, 0.6))
+	_px(c, 2, 2, 1, 1, Color(0.75, 0.7, 0.6)); _px(c, 5, 2, 1, 1, Color(0.75, 0.7, 0.6))
+	_px(c, 3, 3, 2, 1, Color(0.8, 0.7, 0.5)); _px(c, 3, 6, 2, 1, Color(0.8, 0.7, 0.5))
+	_px(c, 1, 10, 6, 4, Color(0.7, 0.35, 0.1)); _px(c, 0, 11, 8, 2, Color(0.7, 0.35, 0.1))
+	_px(c, 1, 14, 6, 3, Color(0.65, 0.3, 0.08)); _px(c, 2, 17, 4, 1, Color(0.65, 0.3, 0.08))
+	_px(c, 3, 12, 2, 2, Color(0.2, 0.1, 0.05))
+	_px(c, 4, 1, 1, 13, Color(0.85, 0.8, 0.7, 0.6))
+	add_child(c)
+
+func _build_comic(pos: Vector2):
+	var c := Node2D.new(); c.name = "ComicVisual"; c.position = pos
+	_px(c, 0, 0, 10, 8, Color(0.9, 0.85, 0.2)); _px(c, 1, 1, 8, 6, Color(0.95, 0.9, 0.4))
+	_px(c, 2, 2, 1, 4, Color(0.2, 0.35, 0.85)); _px(c, 3, 3, 1, 1, Color(0.2, 0.35, 0.85))
+	_px(c, 4, 4, 1, 1, Color(0.2, 0.35, 0.85)); _px(c, 5, 3, 1, 1, Color(0.2, 0.35, 0.85))
+	_px(c, 6, 2, 1, 4, Color(0.2, 0.35, 0.85)); _px(c, 0, 0, 1, 8, Color(0.8, 0.75, 0.15))
+	add_child(c)
+
+func _build_poster(pos: Vector2):
+	var c := Node2D.new(); c.name = "PosterVisual"; c.position = pos
+	_px(c, 0, 0, 16, 12, Color(0.15, 0.15, 0.3)); _px(c, 1, 1, 14, 10, Color(0.85, 0.2, 0.2))
+	_px(c, 6, 2, 4, 2, Color(0.2, 0.35, 0.9)); _px(c, 5, 4, 6, 3, Color(0.2, 0.35, 0.9))
+	_px(c, 4, 7, 8, 2, Color(0.15, 0.25, 0.75))
+	_px(c, 2, 2, 1, 1, Color(1, 0.95, 0.3)); _px(c, 12, 3, 1, 1, Color(1, 0.95, 0.3))
+	_px(c, 3, 8, 1, 1, Color(1, 0.95, 0.3)); _px(c, 13, 7, 1, 1, Color(1, 0.95, 0.3))
+	_px(c, 2, 10, 12, 1, Color(1, 0.95, 0.3, 0.7))
+	add_child(c)
+
+func _build_figure(pos: Vector2):
+	var c := Node2D.new(); c.name = "FigureVisual"; c.position = pos
+	_px(c, 1, 8, 4, 2, Color(0.3, 0.3, 0.35))
+	_px(c, 2, 6, 1, 2, Color(0.2, 0.35, 0.85)); _px(c, 4, 6, 1, 2, Color(0.2, 0.35, 0.85))
+	_px(c, 1, 3, 4, 3, Color(0.2, 0.4, 0.9))
+	_px(c, 0, 4, 1, 3, Color(0.7, 0.15, 0.15)); _px(c, 5, 4, 1, 3, Color(0.7, 0.15, 0.15))
+	_px(c, 2, 1, 2, 2, Color(0.9, 0.75, 0.6)); _px(c, 2, 1, 2, 1, Color(0.2, 0.35, 0.85))
+	_px(c, 5, 2, 1, 2, Color(0.2, 0.4, 0.9)); _px(c, 5, 1, 1, 1, Color(0.9, 0.75, 0.6))
+	add_child(c)
+
+func _build_console(pos: Vector2):
+	var c := Node2D.new(); c.name = "ConsoleVisual"; c.position = pos
+	_px(c, 0, 0, 12, 9, Color(0.15, 0.15, 0.2)); _px(c, 1, 1, 10, 7, Color(0.1, 0.2, 0.15))
+	_px(c, 2, 2, 3, 1, Color(0.15, 0.25, 0.2)); _px(c, 4, 9, 4, 1, Color(0.2, 0.2, 0.25))
+	_px(c, 2, 11, 8, 3, Color(0.12, 0.12, 0.15))
+	_px(c, 3, 12, 1, 1, Color(0.3, 0.1, 0.1)); _px(c, 5, 12, 4, 1, Color(0.08, 0.08, 0.1))
+	_px(c, 0, 14, 4, 2, Color(0.18, 0.18, 0.22))
+	_px(c, 1, 14, 1, 1, Color(0.3, 0.3, 0.4)); _px(c, 3, 14, 1, 1, Color(0.2, 0.5, 0.2))
+	add_child(c)
+
+func _px(parent: Node2D, x: int, y: int, w: int, h: int, color: Color):
+	var r := ColorRect.new()
+	r.position = Vector2(x, y); r.size = Vector2(w, h)
+	r.color = color; r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(r)

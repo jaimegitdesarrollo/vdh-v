@@ -37,7 +37,7 @@ func _create_hint_label():
 	_hint_label.text = "[ E ]"
 	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_hint_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_hint_label.add_theme_font_size_override("font_size", 8)
+	_hint_label.add_theme_font_size_override("font_size", 11)
 	_hint_label.add_theme_color_override("font_color", Color(1.0, 0.95, 0.8, 0.6))
 	_hint_label.add_theme_color_override("font_outline_color", Color(0.2, 0.15, 0.0, 0.5))
 	_hint_label.add_theme_constant_override("outline_size", 2)
