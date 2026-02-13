@@ -1,6 +1,6 @@
 extends Node2D
 ## PongEvolved — Minijuego Pong progresivo para Magic Man Cap 1.
-## 5 fases que evolucionan cada 2 puntos. Victoria a 10 puntos.
+## 2 fases que evolucionan cada 2 puntos. Victoria a 10 puntos.
 
 signal gameplay_finished
 
@@ -11,7 +11,6 @@ var ball_texture: Texture2D = preload("res://assets/sprites/minigames/ball.png")
 # Tamaños de referencia para colisiones
 const PADDLE_SIZE := Vector2(8, 32)
 const BALL_SIZE := Vector2(8, 8)
-const ENEMY_PADDLE_2_SIZE := Vector2(8, 24)
 
 # Configuración
 var ball_speed: float = 200.0
@@ -31,22 +30,14 @@ var magic_man_sprite: Sprite2D
 var balls: Array[Node2D] = []
 var player_paddle: Sprite2D
 var enemy_paddle: Sprite2D
-var enemy_paddle_2: Sprite2D = null
 var score_label: Label
 var phase_label: Label
 
 # Área de juego (en coordenadas de viewport 320x180)
 var play_area: Rect2 = Rect2(0, 0, 320, 180)
-var ball_trail_enabled: bool = false
-var ball_invisible: bool = false
-var obstacles: Array[ColorRect] = []
-
 # Phase viñeta texts
 const PHASE_VINETAS: Dictionary = {
 	2: "¡FASE 2: MULTI-BOLA!\nMagic Man debe enfrentar dos pelotas a la vez.",
-	3: "¡FASE 3: OBSTÁCULOS!\nBloques misteriosos aparecen en el campo.",
-	4: "¡FASE 4: DOBLE PALETA!\nEl enemigo recibe refuerzos. ¡No te rindas!",
-	5: "¡FASE 5: BOLA INVISIBLE!\nLa pelota se desvanece... ¡Confía en tus reflejos!",
 }
 
 
@@ -170,13 +161,6 @@ func _move_enemy_ai(delta):
 	enemy_paddle.position.y += sign(diff) * paddle_speed * 0.55 * delta
 	enemy_paddle.position.y = clamp(enemy_paddle.position.y, 0, 180 - PADDLE_SIZE.y)
 
-	# Segunda paleta del enemigo (fase 4+)
-	if enemy_paddle_2 and is_instance_valid(enemy_paddle_2):
-		var target_y2 = closest_ball.position.y + randf_range(-40, 40)
-		var diff2 = target_y2 - enemy_paddle_2.position.y
-		enemy_paddle_2.position.y += sign(diff2) * paddle_speed * 0.4 * delta
-		enemy_paddle_2.position.y = clamp(enemy_paddle_2.position.y, 0, 180 - ENEMY_PADDLE_2_SIZE.y)
-
 
 func _move_balls(delta):
 	for ball in balls:
@@ -215,24 +199,6 @@ func _move_balls(delta):
 			ball.set_meta("direction", dir)
 			AudioManager.play_sfx("sfx_pong_hit_enemy")
 
-		# Rebote con segunda paleta enemigo
-		if enemy_paddle_2 and is_instance_valid(enemy_paddle_2):
-			var ep2_rect = Rect2(enemy_paddle_2.position, ENEMY_PADDLE_2_SIZE)
-			if ball_rect.intersects(ep2_rect) and dir.x > 0:
-				dir.x = -abs(dir.x)
-				ball.set_meta("direction", dir.normalized())
-
-		# Rebote con obstáculos
-		for obs in obstacles:
-			if is_instance_valid(obs):
-				var obs_rect = Rect2(obs.position, obs.size)
-				if ball_rect.intersects(obs_rect):
-					dir = -dir
-					ball.set_meta("direction", dir)
-
-		# Invisibilidad parcial (fase 5)
-		if ball_invisible:
-			ball.visible = fmod(Time.get_ticks_msec() / 1000.0, 0.6) > 0.3
 
 
 func _check_scoring():
@@ -270,8 +236,8 @@ func _check_scoring():
 
 
 func _check_phase_evolution():
-	var new_phase = min((player_score / 2) + 1, 5)
-	if new_phase != current_phase and new_phase <= 5 and not vineta_active:
+	var new_phase = min((player_score / 2) + 1, 2)
+	if new_phase != current_phase and new_phase <= 2 and not vineta_active:
 		current_phase = new_phase
 		_show_phase_vineta(current_phase)
 
@@ -306,10 +272,6 @@ func _show_phase_vineta(phase: int):
 	# Phase up SFX
 	AudioManager.play_sfx("sfx_pong_phase_up")
 
-	# Apply non-ball phase mechanics
-	match phase:
-		3: _enable_trail_and_obstacles()
-		4: _give_enemy_second_paddle()
 	_update_phase_display()
 
 	# Countdown before resuming
@@ -321,59 +283,8 @@ func _show_phase_vineta(phase: int):
 		_spawn_ball()  # multi-ball from phase 2 onwards
 		AudioManager.play_sfx("sfx_pong_multi_ball")
 
-	# Phase 5: invisible + faster balls (applied after spawning)
-	if current_phase >= 5:
-		ball_invisible = true
-		AudioManager.play_sfx("sfx_pong_speed_up")
-		for b in balls:
-			if is_instance_valid(b):
-				b.set_meta("speed", ball_speed * 1.3)
-
 	vineta_active = false
 	is_playing = true
-
-
-func _evolve_to_phase(phase: int):
-	match phase:
-		2: _spawn_second_ball()
-		3: _enable_trail_and_obstacles()
-		4: _give_enemy_second_paddle()
-		5: _enable_invisible_ball()
-
-
-func _spawn_second_ball():
-	_spawn_ball()
-
-
-func _enable_trail_and_obstacles():
-	ball_trail_enabled = true
-	# Añadir obstáculos centrales
-	for i in range(3):
-		var obs = ColorRect.new()
-		obs.size = Vector2(6, 16)
-		obs.position = Vector2(155 + randf_range(-20, 20), 30 + i * 50)
-		obs.color = Color(0.3, 0.3, 0.5, 0.8)
-		add_child(obs)
-		obstacles.append(obs)
-
-
-func _give_enemy_second_paddle():
-	enemy_paddle_2 = Sprite2D.new()
-	enemy_paddle_2.name = "EnemyPaddle2"
-	enemy_paddle_2.texture = paddle_texture
-	enemy_paddle_2.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	enemy_paddle_2.centered = false
-	enemy_paddle_2.position = Vector2(270, 78)
-	enemy_paddle_2.modulate = Color(0.6, 0.15, 0.15, 0.8)
-	add_child(enemy_paddle_2)
-
-
-func _enable_invisible_ball():
-	ball_invisible = true
-	# Aumentar velocidad
-	for ball in balls:
-		if is_instance_valid(ball):
-			ball.set_meta("speed", ball_speed * 1.3)
 
 
 func _update_score_display():
@@ -420,19 +331,10 @@ func reset_game():
 	player_score = 0
 	enemy_score = 0
 	current_phase = 1
-	ball_invisible = false
-	ball_trail_enabled = false
 	for ball in balls:
 		if is_instance_valid(ball):
 			ball.queue_free()
 	balls.clear()
-	for obs in obstacles:
-		if is_instance_valid(obs):
-			obs.queue_free()
-	obstacles.clear()
-	if enemy_paddle_2 and is_instance_valid(enemy_paddle_2):
-		enemy_paddle_2.queue_free()
-		enemy_paddle_2 = null
 	_spawn_ball()
 	_update_score_display()
 	_update_phase_display()

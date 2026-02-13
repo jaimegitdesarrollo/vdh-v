@@ -1,0 +1,14 @@
+{
+    "chapter": 5,
+    "light_ratio": 0.3,
+    "spawn_interval": 0.7,
+    "base_speed": 62,
+    "shield_color": "#606068",
+    "shield_glow": false,
+    "max_protection": 0.5,
+    "required_light_words": 6,
+    "auto_lose": false,
+    "shadow_fade": false,
+    "light_words": ["Dormir", "Esconderme", "Que acabe el día", "No pensar", "Solo un rato más", "Cansado"],
+    "shadow_words": ["No vales nada", "Todos estarían mejor", "Nadie te va a ayudar", "Siempre será así", "Das pena", "No mereces estar aquí"]
+}

@@ -1,0 +1,14 @@
+{
+    "chapter": 4,
+    "light_ratio": 0.4,
+    "spawn_interval": 0.8,
+    "base_speed": 55,
+    "shield_color": "#888078",
+    "shield_glow": false,
+    "max_protection": 0.7,
+    "required_light_words": 5,
+    "auto_lose": false,
+    "shadow_fade": false,
+    "light_words": ["Da igual", "Silencio", "Paciencia", "Otro día más", "No pasa nada", "Mañana será igual"],
+    "shadow_words": ["No sirves", "Nunca cambiarás", "Ríndete", "Basura", "Ni tu madre te aguanta", "Desaparece"]
+}

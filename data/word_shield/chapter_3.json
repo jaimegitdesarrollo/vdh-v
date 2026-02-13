@@ -1,0 +1,14 @@
+{
+    "chapter": 3,
+    "light_ratio": 0.5,
+    "spawn_interval": 0.9,
+    "base_speed": 50,
+    "shield_color": "#B8A850",
+    "shield_glow": false,
+    "max_protection": 0.85,
+    "required_light_words": 5,
+    "auto_lose": false,
+    "shadow_fade": false,
+    "light_words": ["Normal", "Aguantar", "Costumbre", "Recreo", "Deberes", "Esfuerzo"],
+    "shadow_words": ["Fracasado", "Estorbo", "Invisible", "Das asco", "Ojalá no vinieras", "Todos te odian"]
+}

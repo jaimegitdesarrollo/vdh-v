@@ -1,0 +1,14 @@
+{
+    "chapter": 2,
+    "light_ratio": 0.6,
+    "spawn_interval": 1.0,
+    "base_speed": 45,
+    "shield_color": "#E8C840",
+    "shield_glow": true,
+    "max_protection": 0.95,
+    "required_light_words": 4,
+    "auto_lose": false,
+    "shadow_fade": false,
+    "light_words": ["Mamá", "Casa", "Leer", "Tranquilo", "Música", "Abuela"],
+    "shadow_words": ["Inútil", "Cobarde", "Mentiroso", "Gordo", "Nadie te quiere", "Vete"]
+}

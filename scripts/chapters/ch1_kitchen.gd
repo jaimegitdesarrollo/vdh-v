@@ -72,7 +72,7 @@ func _build_floor():
 func _build_walls():
 	var wt := 8.0 # wall thickness
 
-	# Top wall (with gap for door)
+	# Top wall (with gap for door visual, but blocked by invisible collision)
 	var door_x := ROOM_PX_W / 2.0 - 12
 	_add_wall("WallTopLeft", OFFSET, Vector2(door_x, wt))
 	_add_wall("WallTopRight", OFFSET + Vector2(door_x + 24, 0), Vector2(ROOM_PX_W - door_x - 24, wt))
@@ -82,6 +82,8 @@ func _build_walls():
 	_add_wall("WallLeft", OFFSET, Vector2(wt, ROOM_PX_H))
 	# Right wall
 	_add_wall("WallRight", OFFSET + Vector2(ROOM_PX_W - wt, 0), Vector2(wt, ROOM_PX_H))
+	# Door blocker — invisible collision so player can't walk through
+	_add_door_blocker("DoorBlocker", OFFSET + Vector2(door_x, 0), Vector2(24, wt))
 
 
 func _add_wall(wall_name: String, pos: Vector2, wall_size: Vector2):
@@ -106,6 +108,20 @@ func _add_wall(wall_name: String, pos: Vector2, wall_size: Vector2):
 	wall.add_child(visual)
 
 	add_child(wall)
+
+
+func _add_door_blocker(blocker_name: String, pos: Vector2, blocker_size: Vector2):
+	var body := StaticBody2D.new()
+	body.name = blocker_name
+	body.position = pos + blocker_size / 2.0
+	body.collision_layer = 2
+	body.collision_mask = 0
+	var shape := CollisionShape2D.new()
+	var rect_shape := RectangleShape2D.new()
+	rect_shape.size = blocker_size
+	shape.shape = rect_shape
+	body.add_child(shape)
+	add_child(body)
 
 
 func _build_furniture():
@@ -142,8 +158,9 @@ func _build_interactables():
 		"res://assets/sprites/tiles/fridge.png")
 
 	# Door — top center gap (leads to street)
+	# Area extends 28px into room so InteractionArea (offset y+8) can detect it
 	var door_pos := OFFSET + Vector2(ROOM_PX_W / 2.0 - 12, -2)
-	_add_interactable("DoorToStreet", door_pos, Vector2(24, 12), Color(0.45, 0.3, 0.15),
+	_add_interactable("DoorToStreet", door_pos, Vector2(24, 28), Color(0.45, 0.3, 0.15),
 		"transition", "", "res://scenes/chapters/chapter1/ch1_street.tscn",
 		"res://assets/sprites/tiles/door_open.png")
 

@@ -82,7 +82,7 @@ func _build_walls():
 
 	# Top wall
 	_add_wall("WallTop", OFFSET + Vector2(0, 0), Vector2(ROOM_PX_W, wall_thickness))
-	# Bottom wall (with gap for door)
+	# Bottom wall (with gap for door visual, but blocked by invisible collision)
 	var door_x := ROOM_PX_W / 2.0 - 12 # door gap 24px wide
 	_add_wall("WallBottomLeft", OFFSET + Vector2(0, ROOM_PX_H - wall_thickness), Vector2(door_x, wall_thickness))
 	_add_wall("WallBottomRight", OFFSET + Vector2(door_x + 24, ROOM_PX_H - wall_thickness), Vector2(ROOM_PX_W - door_x - 24, wall_thickness))
@@ -90,6 +90,8 @@ func _build_walls():
 	_add_wall("WallLeft", OFFSET + Vector2(0, 0), Vector2(wall_thickness, ROOM_PX_H))
 	# Right wall
 	_add_wall("WallRight", OFFSET + Vector2(ROOM_PX_W - wall_thickness, 0), Vector2(wall_thickness, ROOM_PX_H))
+	# Door blocker — invisible collision so player can't walk through
+	_add_door_blocker("DoorBlocker", OFFSET + Vector2(door_x, ROOM_PX_H - wall_thickness), Vector2(24, wall_thickness))
 
 
 func _add_wall(wall_name: String, pos: Vector2, wall_size: Vector2):
@@ -114,6 +116,20 @@ func _add_wall(wall_name: String, pos: Vector2, wall_size: Vector2):
 	wall.add_child(visual)
 
 	add_child(wall)
+
+
+func _add_door_blocker(blocker_name: String, pos: Vector2, blocker_size: Vector2):
+	var body := StaticBody2D.new()
+	body.name = blocker_name
+	body.position = pos + blocker_size / 2.0
+	body.collision_layer = 2
+	body.collision_mask = 0
+	var shape := CollisionShape2D.new()
+	var rect_shape := RectangleShape2D.new()
+	rect_shape.size = blocker_size
+	shape.shape = rect_shape
+	body.add_child(shape)
+	add_child(body)
 
 
 func _build_furniture():

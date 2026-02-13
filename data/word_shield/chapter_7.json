@@ -1,0 +1,16 @@
+{
+    "chapter": 7,
+    "light_ratio": 0.1,
+    "spawn_interval": 0.4,
+    "base_speed": 80,
+    "shield_color": "#000000",
+    "shield_glow": false,
+    "max_protection": 0.0,
+    "required_light_words": 99,
+    "auto_lose": true,
+    "auto_lose_timer": 35,
+    "light_damage": 2,
+    "shadow_fade": false,
+    "light_words": ["Duele", "No quiero estar aquí", "Quiero volar", "Ojalá todo pare", "Para qué"],
+    "shadow_words": ["Todo es culpa tuya", "El mundo no te necesita", "Nadie te va a ayudar", "Nunca serás suficiente", "No vales nada", "Desaparece", "Siempre será así", "Estorbo", "Cobarde", "Ríndete"]
+}

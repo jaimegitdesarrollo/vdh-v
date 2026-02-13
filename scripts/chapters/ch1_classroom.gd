@@ -11,7 +11,7 @@ const MAP_HEIGHT: int = 400
 var PlayerScene: PackedScene = preload("res://scenes/player/player.tscn")
 var HUDScene: PackedScene = preload("res://scenes/ui/hud.tscn")
 var DialogueBoxScene: PackedScene = preload("res://scenes/ui/dialogue_box.tscn")
-var UndertaleBattleScene: PackedScene = preload("res://scenes/undertale/undertale_battle.tscn")
+var WordShieldScene: PackedScene = preload("res://scenes/combat/word_shield.tscn")
 
 # Classmates spritesheet (128x24, 8 frames of 16x24)
 var classmates_sheet: Texture2D = preload("res://assets/sprites/npcs/classmates_strip.png")
@@ -23,7 +23,7 @@ var current_phase: Phase = Phase.ENTERING
 # Node references
 var player: CharacterBody2D
 var camera: Camera2D
-var undertale_battle: Control
+var word_shield_battle: Control
 var cristian_seat_pos: Vector2 = Vector2(200, 240)
 
 # Bully NPC references (for cinematic movement)
@@ -259,41 +259,42 @@ func _start_battle():
 	battle_intro.intro_finished.connect(func():
 		intro_layer.queue_free()
 	)
-	battle_intro.show_single_panel("¡BATALLA MENTAL!\nLos insultos de los bullies cobran forma.\nMueve tu corazón con las flechas.\n¡Esquiva todo para sobrevivir!")
+	battle_intro.show_single_panel("¡ESCUDO DE PALABRAS!\nRecoge las Palabras de Luz para formar tu escudo.\n¡Esquiva las Palabras Sombra!\nMueve tu corazón con las flechas.")
 	await battle_intro.intro_finished
 
-	# Create UndertaleBattle on a CanvasLayer (screen-space, independent of camera)
+	# Create WordShield on a CanvasLayer (screen-space, independent of camera)
 	var battle_layer = CanvasLayer.new()
 	battle_layer.name = "BattleLayer"
 	battle_layer.layer = 12
 	battle_layer.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(battle_layer)
 
-	undertale_battle = UndertaleBattleScene.instantiate()
-	undertale_battle.name = "UndertaleBattle"
-	undertale_battle.split_screen = true
-	battle_layer.add_child(undertale_battle)
+	word_shield_battle = WordShieldScene.instantiate()
+	word_shield_battle.name = "WordShield"
+	word_shield_battle.split_screen = true
+	battle_layer.add_child(word_shield_battle)
 
-	# Connect battle_finished signal
-	undertale_battle.battle_finished.connect(_on_battle_finished)
+	# Connect signals — both won and lost end the scripted scene
+	word_shield_battle.combat_won.connect(_on_battle_finished)
+	word_shield_battle.combat_lost.connect(_on_battle_finished)
 
 	# Small delay before starting
 	await get_tree().create_timer(0.3).timeout
-	undertale_battle.start_battle()
+	word_shield_battle.start_battle(1)
 
 
 func _on_battle_finished():
 	current_phase = Phase.DIALOGUE_POST
 
 	# Clean up battle + its CanvasLayer — hide immediately, then free
-	if undertale_battle:
-		var battle_layer = undertale_battle.get_parent()
+	if word_shield_battle:
+		var battle_layer = word_shield_battle.get_parent()
 		if battle_layer is CanvasLayer:
 			battle_layer.visible = false
 			battle_layer.queue_free()
 		else:
-			undertale_battle.queue_free()
-		undertale_battle = null
+			word_shield_battle.queue_free()
+		word_shield_battle = null
 
 	# Re-enable player physics (disabled during auto-walk)
 	if player:

@@ -1,0 +1,15 @@
+{
+    "chapter": 8,
+    "light_ratio": 0.8,
+    "spawn_interval": 1.5,
+    "base_speed": 35,
+    "shield_color": "#E8C870",
+    "shield_glow": true,
+    "max_protection": 0.9,
+    "required_light_words": 4,
+    "auto_lose": false,
+    "shadow_fade": true,
+    "shadow_fade_time": 3.0,
+    "light_words": ["Ayuda", "No estoy solo", "Mañana", "Puedo hablar", "Duele, pero estoy aquí", "Alguien me escucha", "Paso a paso", "Merece la pena intentar"],
+    "shadow_words": ["Siempre será así", "No vales", "Solo"]
+}

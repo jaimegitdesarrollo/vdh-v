@@ -1,0 +1,14 @@
+{
+    "chapter": 6,
+    "light_ratio": 0.2,
+    "spawn_interval": 0.6,
+    "base_speed": 70,
+    "shield_color": "#282028",
+    "shield_glow": false,
+    "max_protection": 0.3,
+    "required_light_words": 6,
+    "auto_lose": false,
+    "shadow_fade": false,
+    "light_words": ["Desaparecer", "Ojalá dormir para siempre", "Ya no siento", "Vacío", "Lejos", "Nada"],
+    "shadow_words": ["Todo es culpa tuya", "El mundo no te necesita", "Cobarde por seguir aquí", "Nunca serás suficiente", "Molestia", "Estorbo"]
+}

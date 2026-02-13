@@ -1,0 +1,28 @@
+{
+    "chapter": 1,
+    "light_ratio": 0.7,
+    "spawn_interval": 1.2,
+    "base_speed": 40,
+    "shield_color": "#FFD700",
+    "shield_glow": true,
+    "max_protection": 1.0,
+    "required_light_words": 4,
+    "auto_lose": false,
+    "shadow_fade": false,
+    "light_words": [
+        "Amigo",
+        "Risa",
+        "Jugar",
+        "Mañana",
+        "Dibujar",
+        "Cómic"
+    ],
+    "shadow_words": [
+        "Tonto",
+        "Solo",
+        "Raro",
+        "Cállate",
+        "Feo",
+        "Bicho"
+    ]
+}
