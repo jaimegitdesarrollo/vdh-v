@@ -8,7 +8,20 @@
     "max_protection": 0.95,
     "required_light_words": 4,
     "auto_lose": false,
-    "shadow_fade": false,
+    "battle_duration": 45,
+    "variants": ["echo"],
+    "echo_config": {
+        "orbit_duration": 5.0,
+        "max_echoes": 3,
+        "orbit_radius_min": 15,
+        "orbit_radius_max": 25
+    },
     "light_words": ["Mamá", "Casa", "Leer", "Tranquilo", "Música", "Abuela"],
-    "shadow_words": ["Inútil", "Cobarde", "Mentiroso", "Gordo", "Nadie te quiere", "Vete"]
+    "shadow_words": ["Inútil", "Cobarde", "Mentiroso", "Gordo", "Nadie te quiere", "Vete"],
+    "background_phrases": [
+        "Mamá no sabe lo que pasa...",
+        "En casa puedo respirar",
+        "Los libros no me juzgan",
+        "La abuela siempre escucha"
+    ]
 }

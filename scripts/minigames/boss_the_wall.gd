@@ -109,6 +109,7 @@ func _setup_boss():
 		magic_man_sprite.texture = magic_man_texture
 		magic_man_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		magic_man_sprite.centered = true
+		magic_man_sprite.scale = Vector2(0.5, 0.5)
 		magic_man_sprite.position = Vector2(paddle.position.x, paddle.position.y - 12)
 		add_child(magic_man_sprite)
 

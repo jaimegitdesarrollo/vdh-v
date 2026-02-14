@@ -19,7 +19,7 @@ func _init():
 	if sheet != null:
 		var at := AtlasTexture.new()
 		at.atlas = sheet
-		at.region = Rect2(0, 0, 16, 16)
+		at.region = Rect2(0, 0, 32, 32)
 		at.filter_clip = true
 		magic_man_texture = at
 	else:
@@ -117,11 +117,15 @@ func _on_boss_defeated():
 func _show_victory():
 	current_phase = Phase.VICTORY
 
-	# Pantalla victoria — explicit size (anchors don't work inside Node2D)
+	# Pantalla victoria en CanvasLayer para que esté en espacio de pantalla
+	var victory_layer := CanvasLayer.new()
+	victory_layer.name = "VictoryLayer"
+	victory_layer.layer = 50
+	add_child(victory_layer)
+
 	victory_screen = Control.new()
-	victory_screen.size = Vector2(320, 180)
-	victory_screen.position = Vector2.ZERO
-	add_child(victory_screen)
+	victory_screen.set_anchors_preset(Control.PRESET_FULL_RECT)
+	victory_layer.add_child(victory_screen)
 
 	var bg = ColorRect.new()
 	bg.size = Vector2(320, 180)

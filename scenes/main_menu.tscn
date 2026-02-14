@@ -191,7 +191,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 16)
 layout_mode = 2
 focus_neighbor_top = NodePath("../BtnClassroom")
-focus_neighbor_bottom = NodePath("../BtnQuit")
+focus_neighbor_bottom = NodePath("../BtnPoems")
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.8, 0.2, 0.2, 1)
 theme_override_colors/font_focus_color = Color(0.8, 0.2, 0.2, 1)
@@ -204,11 +204,29 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
 text = "The Wall (Debug)"
 
-[node name="BtnQuit" type="Button" parent="ButtonsContainer"]
+[node name="BtnPoems" type="Button" parent="ButtonsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 16)
 layout_mode = 2
 focus_neighbor_top = NodePath("../BtnTheWall")
+focus_neighbor_bottom = NodePath("../BtnQuit")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.7, 0.5, 0.9, 1)
+theme_override_colors/font_focus_color = Color(0.7, 0.5, 0.9, 1)
+theme_override_colors/font_color = Color(0.8, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "Poemas"
+
+[node name="BtnQuit" type="Button" parent="ButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 16)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BtnPoems")
 focus_neighbor_bottom = NodePath("../BtnNewGame")
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.95, 0.2, 1)

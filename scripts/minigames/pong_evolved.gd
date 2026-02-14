@@ -76,6 +76,7 @@ func _setup_game():
 		magic_man_sprite.texture = magic_man_texture
 		magic_man_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		magic_man_sprite.centered = false
+		magic_man_sprite.scale = Vector2(0.5, 0.5)
 		magic_man_sprite.position = Vector2(-14, 8)
 		player_paddle.add_child(magic_man_sprite)
 

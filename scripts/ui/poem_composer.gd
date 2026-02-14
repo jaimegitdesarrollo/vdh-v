@@ -96,14 +96,40 @@ func _setup_ui():
 		btn.name = "Option%s" % ["A", "B", "C"][i]
 		btn.custom_minimum_size = Vector2(260, 14)
 		btn.add_theme_font_size_override("font_size", 11)
+
+		# Normal style
 		var btn_style = StyleBoxFlat.new()
-		btn_style.bg_color = Color(0.9, 0.85, 0.75, 1.0)
+		btn_style.bg_color = Color(0.92, 0.87, 0.78, 1.0)
 		btn_style.border_color = Color(0.6, 0.5, 0.4)
-		btn_style.border_width_bottom = 1
-		btn_style.border_width_left = 1
-		btn_style.border_width_right = 1
-		btn_style.border_width_top = 1
+		btn_style.set_border_width_all(1)
+		btn_style.set_corner_radius_all(2)
+		btn_style.set_content_margin_all(3)
 		btn.add_theme_stylebox_override("normal", btn_style)
+
+		# Hover style
+		var hover_style = StyleBoxFlat.new()
+		hover_style.bg_color = Color(1.0, 0.95, 0.85, 1.0)
+		hover_style.border_color = Color(0.4, 0.25, 0.1)
+		hover_style.set_border_width_all(1)
+		hover_style.set_corner_radius_all(2)
+		hover_style.set_content_margin_all(3)
+		btn.add_theme_stylebox_override("hover", hover_style)
+
+		# Focus style
+		var focus_style = StyleBoxFlat.new()
+		focus_style.bg_color = Color(1.0, 0.95, 0.85, 1.0)
+		focus_style.border_color = Color(0.4, 0.25, 0.1)
+		focus_style.set_border_width_all(1)
+		focus_style.set_corner_radius_all(2)
+		focus_style.set_content_margin_all(3)
+		btn.add_theme_stylebox_override("focus", focus_style)
+
+		# Text colors — dark brown, clearly visible on beige
+		btn.add_theme_color_override("font_color", Color(0.2, 0.12, 0.05))
+		btn.add_theme_color_override("font_hover_color", Color(0.1, 0.05, 0.0))
+		btn.add_theme_color_override("font_focus_color", Color(0.1, 0.05, 0.0))
+		btn.add_theme_color_override("font_pressed_color", Color(0.3, 0.15, 0.05))
+
 		var idx = i
 		btn.pressed.connect(func(): _on_option_selected(idx))
 		btn.visible = false

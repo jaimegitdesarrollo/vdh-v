@@ -8,7 +8,22 @@
     "max_protection": 0.5,
     "required_light_words": 6,
     "auto_lose": false,
-    "shadow_fade": false,
+    "battle_duration": 60,
+    "variants": ["silence"],
+    "silence_config": {
+        "silence_count": 2,
+        "silence_duration": 4.0,
+        "bombardment_word_count": 15,
+        "min_interval": 20.0,
+        "heartbeat_bpm": 50,
+        "fear_text": "TeNgO MiEdO"
+    },
     "light_words": ["Dormir", "Esconderme", "Que acabe el día", "No pensar", "Solo un rato más", "Cansado"],
-    "shadow_words": ["No vales nada", "Todos estarían mejor", "Nadie te va a ayudar", "Siempre será así", "Das pena", "No mereces estar aquí"]
+    "shadow_words": ["No vales nada", "Todos estarían mejor", "Nadie te va a ayudar", "Siempre será así", "Das pena", "No mereces estar aquí"],
+    "background_phrases": [
+        "Quiero dormir y no despertar...",
+        "No hay nadie aquí",
+        "Solo un rato más...",
+        "Estoy tan cansado"
+    ]
 }

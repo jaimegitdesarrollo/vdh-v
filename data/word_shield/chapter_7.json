@@ -10,7 +10,52 @@
     "auto_lose": true,
     "auto_lose_timer": 35,
     "light_damage": 2,
-    "shadow_fade": false,
+    "battle_duration": 35,
+    "variants": ["paralysis", "echo", "mirror", "weight", "silence"],
+    "paralysis_config": {
+        "max_paralyses": 99,
+        "paralysis_duration_min": 2.0,
+        "paralysis_duration_max": 3.5,
+        "interval_min": 4.0,
+        "interval_max": 8.0,
+        "damage_reduction_while_frozen": 0.0
+    },
+    "echo_config": {
+        "orbit_duration": 999,
+        "max_echoes": 99,
+        "orbit_radius_min": 10,
+        "orbit_radius_max": 40
+    },
+    "mirror_config": {
+        "hidden_ratio": 1.0,
+        "reveal_distance": 12,
+        "traps": [
+            {"text": "Amigo", "appears_as": "light", "is_actually": "shadow"},
+            {"text": "Fuerte", "appears_as": "light", "is_actually": "shadow"},
+            {"text": "Normal", "appears_as": "light", "is_actually": "shadow"},
+            {"text": "Ayuda", "appears_as": "light", "is_actually": "shadow"},
+            {"text": "Todo irá bien", "appears_as": "light", "is_actually": "shadow"}
+        ]
+    },
+    "weight_config": {
+        "speed_loss_per_hit": 0.15,
+        "speed_gain_per_light": 0.05,
+        "min_speed_multiplier": 0.15
+    },
+    "silence_config": {
+        "silence_count": 3,
+        "silence_duration": 5.0,
+        "bombardment_word_count": 25,
+        "min_interval": 8.0,
+        "heartbeat_bpm": 35,
+        "fear_text": "TeNgO MiEdO"
+    },
     "light_words": ["Duele", "No quiero estar aquí", "Quiero volar", "Ojalá todo pare", "Para qué"],
-    "shadow_words": ["Todo es culpa tuya", "El mundo no te necesita", "Nadie te va a ayudar", "Nunca serás suficiente", "No vales nada", "Desaparece", "Siempre será así", "Estorbo", "Cobarde", "Ríndete"]
+    "shadow_words": ["Todo es culpa tuya", "El mundo no te necesita", "Nadie te va a ayudar", "Nunca serás suficiente", "No vales nada", "Desaparece", "Siempre será así", "Estorbo", "Cobarde", "Ríndete"],
+    "background_phrases": [
+        "...",
+        "No puedo más",
+        "Quiero que pare",
+        "Para qué seguir"
+    ]
 }

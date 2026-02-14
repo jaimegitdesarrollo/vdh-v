@@ -8,7 +8,19 @@
     "max_protection": 0.7,
     "required_light_words": 5,
     "auto_lose": false,
-    "shadow_fade": false,
+    "battle_duration": 55,
+    "variants": ["weight"],
+    "weight_config": {
+        "speed_loss_per_hit": 0.10,
+        "speed_gain_per_light": 0.15,
+        "min_speed_multiplier": 0.30
+    },
     "light_words": ["Da igual", "Silencio", "Paciencia", "Otro día más", "No pasa nada", "Mañana será igual"],
-    "shadow_words": ["No sirves", "Nunca cambiarás", "Ríndete", "Basura", "Ni tu madre te aguanta", "Desaparece"]
+    "shadow_words": ["No sirves", "Nunca cambiarás", "Ríndete", "Basura", "Ni tu madre te aguanta", "Desaparece"],
+    "background_phrases": [
+        "Da igual todo...",
+        "Otro día más de esto",
+        "Mañana será igual",
+        "Ya no siento nada"
+    ]
 }

@@ -10,7 +10,7 @@ func _init():
 	if sheet != null:
 		var at := AtlasTexture.new()
 		at.atlas = sheet
-		at.region = Rect2(0, 0, 16, 16)
+		at.region = Rect2(0, 0, 32, 32)
 		at.filter_clip = true
 		magic_man_texture = at
 	else:

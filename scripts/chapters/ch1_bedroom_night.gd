@@ -14,6 +14,7 @@ const OFFSET := Vector2(80, 26)
 
 var player: CharacterBody2D
 var diary_scene_instance: Control = null
+var poem_done: bool = false
 
 
 func _ready():
@@ -95,7 +96,133 @@ func _on_diary_dialogue_done():
 
 
 func _on_diary_finished():
-	TransitionManager.change_scene("res://scenes/chapters/chapter1/ch1_end.tscn")
+	poem_done = true
+	# Clean up diary overlay
+	var diary_layer = diary_scene_instance.get_parent()
+	if diary_layer:
+		diary_layer.queue_free()
+	diary_scene_instance = null
+	if player:
+		player.can_move = true
+
+
+# ---------------------------------------------------------------------------
+# Bed interaction
+# ---------------------------------------------------------------------------
+func _on_bed_interacted():
+	if player:
+		player.can_move = false
+
+	if poem_done:
+		DialogueManager.start_dialogue("bedroom_night_bed_sleep")
+		DialogueManager.dialogue_ended.connect(_on_bed_sleep_done, CONNECT_ONE_SHOT)
+	else:
+		DialogueManager.start_dialogue("bedroom_night_bed_blocked")
+		DialogueManager.dialogue_ended.connect(_on_bed_blocked_done, CONNECT_ONE_SHOT)
+
+
+func _on_bed_sleep_done():
+	_show_chapter_end()
+
+
+func _on_bed_blocked_done():
+	if player:
+		player.can_move = true
+
+
+# ---------------------------------------------------------------------------
+# Chapter end sequence
+# ---------------------------------------------------------------------------
+func _show_chapter_end():
+	var end_layer := CanvasLayer.new()
+	end_layer.name = "ChapterEndLayer"
+	end_layer.layer = 90
+	add_child(end_layer)
+
+	# Black overlay — starts transparent, fades in
+	var bg := ColorRect.new()
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.color = Color(0, 0, 0, 0)
+	bg.mouse_filter = Control.MOUSE_FILTER_STOP
+	end_layer.add_child(bg)
+
+	# "Ah, es hora de acostarse..." text
+	var thought_label := Label.new()
+	thought_label.text = "Ah, es hora de acostarse...\nTodo cambiará."
+	thought_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	thought_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	thought_label.set_anchors_preset(Control.PRESET_CENTER)
+	thought_label.offset_left = -120
+	thought_label.offset_right = 120
+	thought_label.offset_top = -20
+	thought_label.offset_bottom = 20
+	thought_label.add_theme_font_size_override("font_size", 11)
+	thought_label.add_theme_color_override("font_color", Color(0.8, 0.75, 0.6))
+	thought_label.modulate.a = 0.0
+	end_layer.add_child(thought_label)
+
+	# Fade in thought text
+	var tween := create_tween()
+	tween.tween_property(thought_label, "modulate:a", 1.0, 1.5)
+	await tween.finished
+	await get_tree().create_timer(2.5).timeout
+
+	# Fade out thought + fade in black
+	var tween2 := create_tween()
+	tween2.set_parallel(true)
+	tween2.tween_property(thought_label, "modulate:a", 0.0, 1.0)
+	tween2.tween_property(bg, "color:a", 1.0, 1.5)
+	await tween2.finished
+	thought_label.queue_free()
+
+	await get_tree().create_timer(1.0).timeout
+
+	# Chapter end title
+	var title_label := Label.new()
+	title_label.text = "FIN CAPÍTULO 1"
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	title_label.set_anchors_preset(Control.PRESET_CENTER)
+	title_label.offset_left = -140
+	title_label.offset_right = 140
+	title_label.offset_top = -20
+	title_label.offset_bottom = 0
+	title_label.add_theme_font_size_override("font_size", 16)
+	title_label.add_theme_color_override("font_color", Color(1.0, 0.95, 0.7))
+	title_label.modulate.a = 0.0
+	end_layer.add_child(title_label)
+
+	# Subtitle
+	var sub_label := Label.new()
+	sub_label.text = "TODO CAMBIARÁ"
+	sub_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	sub_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	sub_label.set_anchors_preset(Control.PRESET_CENTER)
+	sub_label.offset_left = -140
+	sub_label.offset_right = 140
+	sub_label.offset_top = 5
+	sub_label.offset_bottom = 25
+	sub_label.add_theme_font_size_override("font_size", 12)
+	sub_label.add_theme_color_override("font_color", Color(0.7, 0.65, 0.5))
+	sub_label.modulate.a = 0.0
+	end_layer.add_child(sub_label)
+
+	# Fade in titles
+	var tween3 := create_tween()
+	tween3.set_parallel(true)
+	tween3.tween_property(title_label, "modulate:a", 1.0, 2.0)
+	tween3.tween_property(sub_label, "modulate:a", 1.0, 2.5).set_delay(0.5)
+	await tween3.finished
+
+	await get_tree().create_timer(3.0).timeout
+
+	# Wait for input then go to main menu
+	while true:
+		await get_tree().process_frame
+		if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("confirm"):
+			break
+
+	TransitionManager.change_scene("res://scenes/main_menu.tscn")
 
 
 # ---------------------------------------------------------------------------
@@ -117,9 +244,14 @@ func _build_walls():
 	var wt := 8.0
 
 	_add_wall("WallTop", OFFSET, Vector2(ROOM_PX_W, wt))
-	_add_wall("WallBottom", OFFSET + Vector2(0, ROOM_PX_H - wt), Vector2(ROOM_PX_W, wt))
+	# Bottom wall with door gap (door is visible but blocked)
+	var door_x := ROOM_PX_W / 2.0 - 12 # door gap 24px wide
+	_add_wall("WallBottomLeft", OFFSET + Vector2(0, ROOM_PX_H - wt), Vector2(door_x, wt))
+	_add_wall("WallBottomRight", OFFSET + Vector2(door_x + 24, ROOM_PX_H - wt), Vector2(ROOM_PX_W - door_x - 24, wt))
 	_add_wall("WallLeft", OFFSET, Vector2(wt, ROOM_PX_H))
 	_add_wall("WallRight", OFFSET + Vector2(ROOM_PX_W - wt, 0), Vector2(wt, ROOM_PX_H))
+	# Door blocker — invisible collision so player can't walk through
+	_add_door_blocker("DoorBlocker", OFFSET + Vector2(door_x, ROOM_PX_H - wt), Vector2(24, wt))
 
 
 func _add_wall(wall_name: String, pos: Vector2, wall_size: Vector2):
@@ -146,10 +278,21 @@ func _add_wall(wall_name: String, pos: Vector2, wall_size: Vector2):
 	add_child(wall)
 
 
+func _add_door_blocker(blocker_name: String, pos: Vector2, blocker_size: Vector2):
+	var body := StaticBody2D.new()
+	body.name = blocker_name
+	body.position = pos + blocker_size / 2.0
+	body.collision_layer = 2
+	body.collision_mask = 0
+	var shape := CollisionShape2D.new()
+	var rect_shape := RectangleShape2D.new()
+	rect_shape.size = blocker_size
+	shape.shape = rect_shape
+	body.add_child(shape)
+	add_child(body)
+
+
 func _build_furniture():
-	# Bed
-	_add_furniture("Bed", OFFSET + Vector2(12, 16), Vector2(32, 24),
-		"res://assets/sprites/tiles/bed.png")
 	# Desk
 	_add_furniture("Desk", OFFSET + Vector2(120, 16), Vector2(24, 16),
 		"res://assets/sprites/tiles/desk.png")
@@ -177,6 +320,18 @@ func _add_furniture(furniture_name: String, pos: Vector2, furniture_size: Vector
 
 
 func _build_interactables():
+	# Bed — custom interaction (blocks until poem is done)
+	var bed := _add_interactable("Bed", OFFSET + Vector2(12, 16), Vector2(32, 24), Color.TRANSPARENT,
+		"item", "", "",
+		"res://assets/sprites/tiles/bed.png")
+	bed.interacted.connect(_on_bed_interacted)
+
+	# Door — bottom center (visible but blocked, shows dialogue)
+	var door_pos := OFFSET + Vector2(ROOM_PX_W / 2.0 - 12, ROOM_PX_H - 6)
+	_add_interactable("Door", door_pos, Vector2(24, 12), Color.TRANSPARENT,
+		"dialogue", "bedroom_night_door", "",
+		"res://assets/sprites/tiles/door_open.png")
+
 	# Diary on desk — custom interaction
 	var diary := _add_interactable("Diary", OFFSET + Vector2(126, 18), Vector2(10, 8), Color.TRANSPARENT,
 		"item", "", "")

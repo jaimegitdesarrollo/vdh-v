@@ -8,7 +8,29 @@
     "max_protection": 0.3,
     "required_light_words": 6,
     "auto_lose": false,
-    "shadow_fade": false,
+    "battle_duration": 65,
+    "variants": ["echo", "mirror"],
+    "echo_config": {
+        "orbit_duration": 8.0,
+        "max_echoes": 6,
+        "orbit_radius_min": 15,
+        "orbit_radius_max": 35
+    },
+    "mirror_config": {
+        "hidden_ratio": 0.5,
+        "reveal_distance": 18,
+        "traps": [
+            {"text": "Amigo", "appears_as": "light", "is_actually": "shadow"},
+            {"text": "Fuerte", "appears_as": "light", "is_actually": "shadow"},
+            {"text": "Normal", "appears_as": "light", "is_actually": "shadow"}
+        ]
+    },
     "light_words": ["Desaparecer", "Ojalá dormir para siempre", "Ya no siento", "Vacío", "Lejos", "Nada"],
-    "shadow_words": ["Todo es culpa tuya", "El mundo no te necesita", "Cobarde por seguir aquí", "Nunca serás suficiente", "Molestia", "Estorbo"]
+    "shadow_words": ["Todo es culpa tuya", "El mundo no te necesita", "Cobarde por seguir aquí", "Nunca serás suficiente", "Molestia", "Estorbo"],
+    "background_phrases": [
+        "Ya no siento nada",
+        "Todo está vacío",
+        "Quiero desaparecer",
+        "Lejos de todo"
+    ]
 }

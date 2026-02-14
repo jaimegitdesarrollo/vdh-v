@@ -10,6 +10,22 @@
     "auto_lose": false,
     "shadow_fade": true,
     "shadow_fade_time": 3.0,
+    "battle_duration": 35,
+    "variants": ["roots"],
+    "roots_config": {
+        "connection_count": 2,
+        "root_destroy_radius": 8.0,
+        "root_color": "#FFE880",
+        "shadow_fade_on_contact": true
+    },
+    "residual_shadows": true,
+    "residual_shadow_words": ["Siempre será así", "No vales", "Solo"],
     "light_words": ["Ayuda", "No estoy solo", "Mañana", "Puedo hablar", "Duele, pero estoy aquí", "Alguien me escucha", "Paso a paso", "Merece la pena intentar"],
-    "shadow_words": ["Siempre será así", "No vales", "Solo"]
+    "shadow_words": ["Siempre será así", "No vales", "Solo"],
+    "background_phrases": [
+        "Hay alguien ahí...",
+        "No estoy solo",
+        "Mañana será diferente",
+        "Puedo hablar"
+    ]
 }

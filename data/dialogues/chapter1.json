@@ -554,6 +554,51 @@
 		]
 	},
 
+	"bedroom_night_bed_blocked": {
+		"lines": [
+			{
+				"speaker": "Cristian",
+				"text": "No puedo dormir así... Tengo demasiadas cosas en la cabeza.",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Quizás debería escribir algo primero. El diario está en el escritorio.",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
+	"bedroom_night_bed_sleep": {
+		"lines": [
+			{
+				"speaker": "Narrador",
+				"text": "Cristian se mete en la cama. Las palabras que ha escrito aún resuenan en su cabeza.",
+				"emotion": "neutral"
+			},
+			{
+				"speaker": "Narrador",
+				"text": "Por primera vez en mucho tiempo, cierra los ojos sintiéndose un poco más ligero.",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
+	"bedroom_night_door": {
+		"lines": [
+			{
+				"speaker": "Cristian",
+				"text": "Es mejor ir a la cama a descansar, no tengo ganas de nada...",
+				"emotion": "sad"
+			},
+			{
+				"speaker": "Cristian",
+				"text": "Quizás de escribir un poco.",
+				"emotion": "hopeful"
+			}
+		]
+	},
+
 	"papeleria_closed": {
 		"lines": [
 			{

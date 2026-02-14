@@ -43,6 +43,7 @@ var tex_car_white: Texture2D = preload("res://assets/sprites/tiles/car_white.png
 var tex_car_black: Texture2D = preload("res://assets/sprites/tiles/car_black.png")
 var tex_van: Texture2D = preload("res://assets/sprites/tiles/van.png")
 var car_script: GDScript = preload("res://scripts/vehicles/car.gd")
+var pedestrian_script: GDScript = preload("res://scripts/npcs/pedestrian.gd")
 
 # Spritesheet paths for animated cars
 const CAR_SHEETS: Dictionary = {
@@ -120,6 +121,10 @@ func _ready():
 	DialogueManager.load_dialogues("res://data/dialogues/chapter1.json")
 	GameManager.set_exploration_scene("res://scenes/chapters/chapter1/ch1_street.tscn")
 	_load_vegetation_tiles()
+	# Rotate crosswalk texture 90° so stripes are horizontal
+	var cw_img: Image = tex_crosswalk.get_image()
+	cw_img.rotate_90(CLOCKWISE)
+	tex_crosswalk = ImageTexture.create_from_image(cw_img)
 
 	_build_map_base()
 	_build_zone1_residential()
@@ -127,6 +132,7 @@ func _ready():
 	_build_zone3_commercial()
 	_build_zone4_institute_exterior()
 	_build_map_boundaries()
+	_build_boundary_bushes()
 
 	# Street music (same as menu, continues playing)
 	AudioManager.play_music("ch1_soledad_piano")
@@ -290,8 +296,13 @@ func _build_zone1_residential():
 	_deco_col("Z1_Mailbox", 8 * T, zy + 96, tex_mailbox)
 	for c in [11, 29, 44]:
 		_deco("Z1_FA%d" % c, c * T, zy + 96, tex_streetlight)
-	# NPC señora con bolsa
+	# NPC señora con bolsa (estática)
 	_npc("Z1_Senora", 20 * T, zy + 112, Color(0.7, 0.4, 0.4))
+	# Peatones acera norte — caminan horizontalmente
+	_pedestrian("Z1_Ped1", "res://assets/sprites/npcs/pedestrians/hombre_traje_spritesheet.png", [
+		Vector2(5 * T, zy + 96), Vector2(18 * T, zy + 96)], 20.0)
+	_pedestrian("Z1_Ped2", "res://assets/sprites/npcs/pedestrians/señora_bolsa_spritesheet.png", [
+		Vector2(30 * T, zy + 104), Vector2(42 * T, zy + 104)], 18.0)
 	# Árbol urbano en acera norte
 	_veg_bush("Z1_UrbanTree", 10 * T, zy + 4 * T, veg_urban_tree)
 
@@ -368,12 +379,12 @@ func _build_zone2_park():
 		_ground_row("Z2_GS%d" % r, [4, 5], zy + r * T, veg_grass_stones)
 
 	# --- SENDEROS ---
-	# Sendero vertical principal (cols 18-20, rows 1-21)
-	_fill("Z2_PathV", 18 * T, zy + T, 3 * T, 21 * T, veg_path_v)
-	# Transición bordes del sendero vertical (cols 17 y 21)
+	# Sendero vertical principal (cols 18-19, rows 1-21) — 2 tiles ancho
+	_fill("Z2_PathV", 18 * T, zy + T, 2 * T, 21 * T, veg_path_v)
+	# Transición bordes del sendero vertical (cols 17 y 20)
 	for r in range(1, 22):
 		_ground_tile("Z2_TrL%d" % r, 17 * T, zy + r * T, veg_transition)
-		_ground_tile("Z2_TrR%d" % r, 21 * T, zy + r * T, veg_transition)
+		_ground_tile("Z2_TrR%d" % r, 20 * T, zy + r * T, veg_transition)
 	# Sendero horizontal bifurcación hacia puente (cols 20-27, rows 17-18)
 	_fill("Z2_PathH", 20 * T, zy + 17 * T, 8 * T, 2 * T, veg_path_h)
 	# Transición bordes del sendero horizontal
@@ -459,6 +470,15 @@ func _build_zone2_park():
 	_npc("Z2_NPC_Per", 38 * T, zy + 8 * T, Color(0.4, 0.4, 0.6))
 	_npc("Z2_Nino1", 30 * T, zy + 17 * T, Color(0.3, 0.5, 0.3))
 	_npc("Z2_Nino2", 32 * T, zy + 17 * T, Color(0.5, 0.3, 0.3))
+	# Peatones parque — pasean por los caminos
+	_pedestrian("Z2_Ped1", "res://assets/sprites/npcs/pedestrians/mujer_perro_spritesheet.png", [
+		Vector2(19 * T, zy + 3 * T), Vector2(19 * T, zy + 16 * T)], 18.0)
+	_pedestrian("Z2_Ped2", "res://assets/sprites/npcs/pedestrians/niño_balon_spritesheet.png", [
+		Vector2(22 * T, zy + 17 * T), Vector2(22 * T, zy + 21 * T),
+		Vector2(19 * T, zy + 21 * T), Vector2(19 * T, zy + 14 * T)], 22.0)
+	_pedestrian("Z2_Ped3", "res://assets/sprites/npcs/pedestrians/abuelo_gorra_spritesheet.png", [
+		Vector2(36 * T, zy + 9 * T), Vector2(40 * T, zy + 9 * T),
+		Vector2(40 * T, zy + 14 * T), Vector2(36 * T, zy + 14 * T)], 15.0)
 
 	# --- FAROLAS ---
 	_deco("Z2_FA1", 14 * T, zy + 3 * T, tex_streetlight)
@@ -563,6 +583,14 @@ func _build_zone3_commercial():
 		_deco("Z3_FA%d" % c, c * T, zy + 6 * T, tex_streetlight)
 	_deco_col("Z3_PP1", 7 * T, zy + 6 * T, tex_trashcan)
 	_deco_col("Z3_PP2", 39 * T, zy + 6 * T, tex_trashcan)
+	# Peatones acera comercial — mirando tiendas
+	_pedestrian("Z3_Ped1", "res://assets/sprites/npcs/pedestrians/chica_mochila_spritesheet.png", [
+		Vector2(6 * T, zy + 6 * T), Vector2(16 * T, zy + 6 * T)], 15.0)
+	_pedestrian("Z3_Ped2", "res://assets/sprites/npcs/pedestrians/runner_spritesheet.png", [
+		Vector2(28 * T, zy + 5 * T), Vector2(44 * T, zy + 5 * T)], 20.0)
+	_pedestrian("Z3_Ped3", "res://assets/sprites/npcs/pedestrians/skater_spritesheet.png", [
+		Vector2(22 * T, zy + 7 * T), Vector2(35 * T, zy + 7 * T),
+		Vector2(35 * T, zy + 6 * T), Vector2(22 * T, zy + 6 * T)], 17.0)
 
 	# --- CARRETERA (rows 8-12) ---
 	_fill("Z3_CurbN", 0, zy + 8 * T, MAP_W, T, tex_sidewalk_edge)
@@ -686,26 +714,82 @@ func _build_map_boundaries():
 
 
 # =============================================================================
+# BOUNDARY BUSHES — visual barriers at map edges
+# =============================================================================
+func _build_boundary_bushes():
+	var cols: int = MAP_W / T  # 55
+
+	# --- LEFT EDGE (x=0) ---
+	# Z1: rows 5-7 (north sidewalk), 13-15 (south sidewalk), 20-24 (grass transition)
+	# Skip rows 0-4 (buildings) and 8-12 (road)
+	for r in [5, 6, 7, 13, 14, 15, 20, 21, 22, 23, 24]:
+		_veg_bush("BL_Z1_%d" % r, 0, Z1_Y + r * T)
+	# Z2: park left edge — skip rows with existing trees (4-6, 9-13) and river (22-24)
+	for r in [0, 1, 2, 3, 7, 8, 14, 15, 16, 17, 18, 19, 20, 21, 25, 26, 27, 28, 29]:
+		_veg_bush("BL_Z2_%d" % r, 0, Z2_Y + r * T)
+	# Z3: rows 5-7 (north sidewalk), 13-14 (south sidewalk), 20-21 (transition)
+	# Skip rows 0-4 (shops) and 8-12 (road) and 15-19 (wall)
+	for r in [5, 6, 7, 13, 14, 20, 21]:
+		_veg_bush("BL_Z3_%d" % r, 0, Z3_Y + r * T)
+	# Z4: skip entirely — left side (cols 0-2) is the sneaking passage
+
+	# --- RIGHT EDGE (x = col 54) ---
+	var rx: int = (cols - 1) * T
+	# Z1: same pattern as left
+	for r in [5, 6, 7, 13, 14, 15, 20, 21, 22, 23, 24]:
+		_veg_bush("BR_Z1_%d" % r, rx, Z1_Y + r * T)
+	# Z2: park right edge — skip river (22-24)
+	for r in range(0, 22):
+		_veg_bush("BR_Z2_%d" % r, rx, Z2_Y + r * T)
+	for r in range(25, 30):
+		_veg_bush("BR_Z2S_%d" % r, rx, Z2_Y + r * T)
+	# Z3: same as left
+	for r in [5, 6, 7, 13, 14, 20, 21]:
+		_veg_bush("BR_Z3_%d" % r, rx, Z3_Y + r * T)
+	# Z4: skip — institute building blocks right side
+
+	# --- BOTTOM EDGE (y = MAP_H - T) ---
+	var by: int = MAP_H - T
+	for c in range(cols):
+		_veg_bush("BB_%d" % c, c * T, by)
+
+
+# =============================================================================
 # VEGETATION LOADING
 # =============================================================================
 
 func _load_vegetation_tiles():
-	# --- Trees & bushes from vegetation strip ---
-	var strip: Texture2D = load("res://assets/sprites/tiles/vegetation_strip.png")
-	if strip != null:
-		var stiles: Array[Texture2D] = []
-		for i in 13:
-			var at := AtlasTexture.new()
-			at.atlas = strip
-			at.region = Rect2(i * 16, 0, 16, 16)
-			at.filter_clip = true
-			stiles.append(at)
-		veg_tree_crown = stiles[0]
-		veg_tree_base = stiles[1]
-		veg_urban_tree = stiles[2]
-		veg_pine = stiles[3]
-		veg_bush_dense = stiles[4]
-		veg_bush_flowers = stiles[12]
+	# --- Vegetation v2 atlas (4x4 grid, 16x16 tiles, 13 tiles) ---
+	# Layout: Row0: TreeCrown, TreeBase, UrbanTree, Pine
+	#         Row1: BushDense, GrassA, GrassFlowers, PathVertical
+	#         Row2: PathHorizontal, TallGrass, GrassStones, Transition
+	#         Row3: BushFlowers
+	var atlas: Texture2D = load("res://assets/sprites/tiles/vegetation_atlas_v2.png")
+	if atlas != null:
+		var atlas_img: Image = atlas.get_image()
+		var _extract := func(col: int, row: int) -> ImageTexture:
+			var tile_img := atlas_img.get_region(Rect2i(col * 16, row * 16, 16, 16))
+			return ImageTexture.create_from_image(tile_img)
+		# Row 0: Trees
+		veg_tree_crown = _extract.call(0, 0)
+		veg_tree_base = _extract.call(1, 0)
+		veg_urban_tree = _extract.call(2, 0)
+		veg_pine = _extract.call(3, 0)
+		# Row 1: Bush + Grass + Path
+		veg_bush_dense = _extract.call(0, 1)
+		veg_grass = _extract.call(1, 1)
+		veg_grass_flowers = _extract.call(2, 1)
+		veg_path_v = _extract.call(3, 1)
+		# Row 2: Path + Grass variants
+		veg_path_h = _extract.call(0, 2)
+		veg_tall_grass = _extract.call(1, 2)
+		veg_grass_stones = _extract.call(2, 2)
+		veg_transition = _extract.call(3, 2)
+		# Row 3: Flower bush
+		veg_bush_flowers = _extract.call(0, 3)
+		# Scatter variants: reuse tall grass and grass stones for variety
+		veg_grass_b = _extract.call(1, 2)    # Hierba Alta as variant B
+		veg_grass_c = _extract.call(2, 2)    # Piedras en Césped as variant C
 	else:
 		veg_tree_crown = tex_tree
 		veg_tree_base = tex_tree
@@ -713,34 +797,14 @@ func _load_vegetation_tiles():
 		veg_pine = tex_tree
 		veg_bush_dense = tex_bush
 		veg_bush_flowers = tex_bush
-
-	# --- Grass v2 atlas (3x3 grid, 16x16 each) ---
-	# We extract each 16x16 region into a standalone ImageTexture so _fill()
-	# can tile them correctly (AtlasTexture tiles the whole atlas, not the region).
-	var grass_atlas: Texture2D = load("res://assets/sprites/tiles/grass_v2_atlas.png")
-	if grass_atlas != null:
-		var atlas_img: Image = grass_atlas.get_image()
-		var _extract := func(col: int, row: int) -> ImageTexture:
-			var tile_img := atlas_img.get_region(Rect2i(col * 16, row * 16, 16, 16))
-			return ImageTexture.create_from_image(tile_img)
-		veg_grass = _extract.call(0, 0)          # Césped A
-		veg_grass_b = _extract.call(1, 0)        # Césped B
-		veg_grass_c = _extract.call(2, 0)        # Césped C brillante
-		veg_grass_flowers = _extract.call(0, 1)  # Césped con Flores
-		veg_tall_grass = _extract.call(1, 1)     # Hierba Alta
-		veg_grass_stones = _extract.call(2, 1)   # Piedras en Césped
-		veg_path_v = _extract.call(0, 2)         # Sendero Vertical
-		veg_path_h = _extract.call(1, 2)         # Sendero Horizontal
-		veg_transition = _extract.call(2, 2)     # Transición Césped→Tierra
-	else:
 		veg_grass = tex_grass
 		veg_grass_b = tex_grass
 		veg_grass_c = tex_grass
 		veg_grass_flowers = tex_grass
-		veg_path_v = tex_dirt
-		veg_path_h = tex_dirt
 		veg_tall_grass = tex_grass_dark
 		veg_grass_stones = tex_grass
+		veg_path_v = tex_dirt
+		veg_path_h = tex_dirt
 		veg_transition = tex_dirt
 
 
@@ -977,6 +1041,15 @@ func _npc(n: String, x: int, y: int, color: Color):
 	r.name = n; r.position = Vector2(x, y)
 	r.size = Vector2(10, 14); r.color = color
 	add_child(r)
+
+
+## Walking pedestrian NPC (collision obstacle, walks between waypoints).
+func _pedestrian(n: String, sheet: String, points: Array[Vector2], spd: float = 25.0):
+	var p := CharacterBody2D.new()
+	p.set_script(pedestrian_script)
+	p.name = n
+	p.setup(sheet, points, spd)
+	add_child(p)
 
 
 ## Interactable door → scene transition.

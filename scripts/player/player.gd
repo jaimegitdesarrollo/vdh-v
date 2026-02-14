@@ -157,7 +157,7 @@ func _handle_interaction():
 # ---------------------------------------------------------------------------
 # Health — damage & healing
 # ---------------------------------------------------------------------------
-func take_damage(amount: int):
+func take_damage(amount: float):
 	if is_invincible:
 		return
 
@@ -183,7 +183,7 @@ func take_damage(amount: int):
 	invincibility_timer = INVINCIBILITY_DURATION
 
 
-func heal(amount: int):
+func heal(amount: float):
 	var health_system = get_node_or_null("HealthSystem")
 	if health_system and health_system.has_method("heal"):
 		health_system.heal(amount)
@@ -279,8 +279,8 @@ func _setup_from_spritesheet(sheet: Texture2D):
 	if frames.has_animation("default"):
 		frames.remove_animation("default")
 
-	const FW: int = 16
-	const FH: int = 16
+	const FW: int = 32
+	const FH: int = 32
 	var dir_rows: Dictionary = {"down": 0, "up": 1, "left": 2, "right": 3}
 
 	for dir_name in ["down", "up", "left", "right"]:
@@ -303,6 +303,7 @@ func _setup_from_spritesheet(sheet: Texture2D):
 		frames.add_frame(walk_name, _atlas(sheet, 2, row, FW, FH))  # step2
 
 	animated_sprite.sprite_frames = frames
+	animated_sprite.scale = Vector2(0.5, 0.5)
 	animated_sprite.play("idle_down")
 
 

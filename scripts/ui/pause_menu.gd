@@ -119,15 +119,11 @@ func _build_ui():
 	btn_main_menu.pressed.connect(_on_main_menu_pressed)
 
 	# Focus / hover highlighting
-	btn_continue.focus_entered.connect(_on_button_focus_entered.bind(btn_continue))
-	btn_continue.focus_exited.connect(_on_button_focus_exited.bind(btn_continue))
-	btn_continue.mouse_entered.connect(_on_button_focus_entered.bind(btn_continue))
-	btn_continue.mouse_exited.connect(_on_button_focus_exited.bind(btn_continue))
-
-	btn_main_menu.focus_entered.connect(_on_button_focus_entered.bind(btn_main_menu))
-	btn_main_menu.focus_exited.connect(_on_button_focus_exited.bind(btn_main_menu))
-	btn_main_menu.mouse_entered.connect(_on_button_focus_entered.bind(btn_main_menu))
-	btn_main_menu.mouse_exited.connect(_on_button_focus_exited.bind(btn_main_menu))
+	for btn in [btn_continue, btn_main_menu]:
+		btn.focus_entered.connect(_on_button_focus_entered.bind(btn))
+		btn.focus_exited.connect(_on_button_focus_exited.bind(btn))
+		btn.mouse_entered.connect(_on_button_focus_entered.bind(btn))
+		btn.mouse_exited.connect(_on_button_focus_exited.bind(btn))
 
 	# Focus neighbors so keyboard navigation wraps
 	btn_continue.focus_neighbor_bottom = btn_main_menu.get_path()

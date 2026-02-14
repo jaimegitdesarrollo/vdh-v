@@ -8,7 +8,19 @@
     "max_protection": 0.85,
     "required_light_words": 5,
     "auto_lose": false,
-    "shadow_fade": false,
+    "battle_duration": 50,
+    "variants": ["mirror"],
+    "mirror_config": {
+        "hidden_ratio": 0.3,
+        "reveal_distance": 25,
+        "traps": []
+    },
     "light_words": ["Normal", "Aguantar", "Costumbre", "Recreo", "Deberes", "Esfuerzo"],
-    "shadow_words": ["Fracasado", "Estorbo", "Invisible", "Das asco", "Ojalá no vinieras", "Todos te odian"]
+    "shadow_words": ["Fracasado", "Estorbo", "Invisible", "Das asco", "Ojalá no vinieras", "Todos te odian"],
+    "background_phrases": [
+        "¿Esto es normal?",
+        "Solo hay que aguantar...",
+        "Costumbre, supongo",
+        "El recreo es lo peor"
+    ]
 }
