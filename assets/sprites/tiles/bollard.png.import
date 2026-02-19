@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1not53n8bjge"
-path="res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"
+uid="uid://opccbq65a474"
+path="res://.godot/imported/bollard.png-9e1ad9816edf8cc9cf483c61ef6496db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/cristian_spritesheet.png"
-dest_files=["res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"]
+source_file="res://assets/sprites/tiles/bollard.png"
+dest_files=["res://.godot/imported/bollard.png-9e1ad9816edf8cc9cf483c61ef6496db.ctex"]
 
 [params]
 

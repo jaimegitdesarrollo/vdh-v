@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1not53n8bjge"
-path="res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"
+uid="uid://b62mfw3p1cr12"
+path="res://.godot/imported/water_shore_right.png-f0871cae1a69c2a02df6996d9aacbdc4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/cristian_spritesheet.png"
-dest_files=["res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"]
+source_file="res://assets/sprites/tiles/water_shore_right.png"
+dest_files=["res://.godot/imported/water_shore_right.png-f0871cae1a69c2a02df6996d9aacbdc4.ctex"]
 
 [params]
 

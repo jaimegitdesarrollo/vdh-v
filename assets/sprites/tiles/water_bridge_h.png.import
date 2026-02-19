@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1not53n8bjge"
-path="res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"
+uid="uid://da7g35g7txno6"
+path="res://.godot/imported/water_bridge_h.png-cbded614d01610a961c8bec1c1b3470d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/cristian_spritesheet.png"
-dest_files=["res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"]
+source_file="res://assets/sprites/tiles/water_bridge_h.png"
+dest_files=["res://.godot/imported/water_bridge_h.png-cbded614d01610a961c8bec1c1b3470d.ctex"]
 
 [params]
 

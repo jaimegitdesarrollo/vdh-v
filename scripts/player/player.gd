@@ -279,8 +279,8 @@ func _setup_from_spritesheet(sheet: Texture2D):
 	if frames.has_animation("default"):
 		frames.remove_animation("default")
 
-	const FW: int = 32
-	const FH: int = 32
+	const FW: int = 48
+	const FH: int = 48
 	var dir_rows: Dictionary = {"down": 0, "up": 1, "left": 2, "right": 3}
 
 	for dir_name in ["down", "up", "left", "right"]:

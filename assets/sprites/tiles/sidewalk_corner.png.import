@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1not53n8bjge"
-path="res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"
+uid="uid://bejf665pnsoll"
+path="res://.godot/imported/sidewalk_corner.png-d9409230b07458cb717e5cae94a3574a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/cristian_spritesheet.png"
-dest_files=["res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"]
+source_file="res://assets/sprites/tiles/sidewalk_corner.png"
+dest_files=["res://.godot/imported/sidewalk_corner.png-d9409230b07458cb717e5cae94a3574a.ctex"]
 
 [params]
 

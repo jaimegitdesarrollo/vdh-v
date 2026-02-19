@@ -66,6 +66,14 @@ var tex_shop_closed: Texture2D = preload("res://assets/sprites/tiles/shop_closed
 var tex_shop_door: Texture2D = preload("res://assets/sprites/tiles/shop_door.png")
 var tex_shop_window: Texture2D = preload("res://assets/sprites/tiles/shop_window.png")
 var tex_shop_awning: Texture2D = preload("res://assets/sprites/tiles/shop_awning.png")
+var tex_drain_grate: Texture2D = preload("res://assets/sprites/tiles/drain_grate.png")
+var tex_bollard: Texture2D = preload("res://assets/sprites/tiles/bollard.png")
+var tex_water_shore_top: Texture2D = preload("res://assets/sprites/tiles/water_shore_top.png")
+var tex_water_shore_bottom: Texture2D = preload("res://assets/sprites/tiles/water_shore_bottom.png")
+var tex_bridge_h: Texture2D = preload("res://assets/sprites/tiles/water_bridge_h.png")
+var tex_water_lily: Texture2D = preload("res://assets/sprites/tiles/water_lily.png")
+var tex_water_rock: Texture2D = preload("res://assets/sprites/tiles/water_rock.png")
+var tex_water_splash: Texture2D = preload("res://assets/sprites/tiles/water_splash.png")
 
 # --- Vegetation tiles (trees/bushes from strip, grass from v2 atlas) ---
 var veg_tree_crown: Texture2D    # strip ID 0
@@ -318,6 +326,14 @@ func _build_zone1_residential():
 	_moving_car("Z1_CK", 44 * T, zy + 188, "black", tex_car_black, 65.0, -1)
 	_car("Z1_VN", 31 * T, zy + 176, tex_van)  # Van stays parked
 	_fill("Z1_CurbS", 0, zy + 208, MAP_W, T, tex_sidewalk_edge)
+	# Drain grates en el asfalto junto al bordillo (primera fila de carretera)
+	for c in [8, 20, 35, 47]:
+		_ground_tile("Z1_DG_N%d" % c, c * T, zy + 144, tex_drain_grate)
+		_ground_tile("Z1_DG_S%d" % c, c * T, zy + 192, tex_drain_grate)
+	# Bollards en acera junto al paso de cebra (sobre concreto gris, no en bordillo)
+	for c in [14, 17]:
+		_deco_col("Z1_Bol_N%d" % c, c * T, zy + 112, tex_bollard)
+		_deco_col("Z1_Bol_S%d" % c, c * T, zy + 224, tex_bollard)
 
 	# --- ACERA SUR (rows 14-15) ---
 	for c in [9, 31, 44]:
@@ -495,13 +511,24 @@ func _build_zone2_park():
 		Vector2(34 * T, zy + 10 * T), Vector2(36 * T, zy + 12 * T),
 		Vector2(34 * T, zy + 14 * T), Vector2(32 * T, zy + 12 * T)])
 
-	# --- RÍO (rows 22-24) ---
+	# --- RÍO (orilla N row 21, agua rows 22-24, orilla S row 25) ---
+	# Orillas (transición césped ↔ agua)
+	_fill("Z2_ShoreN", 0, zy + 21 * T, MAP_W, T, tex_water_shore_top)
+	_fill("Z2_ShoreS", 0, zy + 25 * T, MAP_W, T, tex_water_shore_bottom)
+	# Agua (3 rows)
 	_fill("Z2_Riv1", 0, zy + 22 * T, MAP_W, T, tex_water)
 	_fill("Z2_Riv2", 0, zy + 23 * T, MAP_W, T, tex_water_deep)
 	_fill("Z2_Riv3", 0, zy + 24 * T, MAP_W, T, tex_water)
+	# Colisiones — bloquea el agua salvo en el puente (cols 22-23)
 	_invis("Z2_RivWL", 0, zy + 22 * T, 22 * T, 3 * T)
 	_invis("Z2_RivWR", 24 * T, zy + 22 * T, MAP_W - 24 * T, 3 * T)
-	_fill("Z2_Bridge", 22 * T, zy + 22 * T, 2 * T, 3 * T, veg_path_v)
+	# Puente horizontal
+	_fill("Z2_Bridge", 22 * T, zy + 22 * T, 2 * T, 3 * T, tex_bridge_h)
+	# Decoraciones acuáticas (nenúfares, roca, onda)
+	_ground_tile("Z2_Lily1", 10 * T, zy + 22 * T, tex_water_lily)
+	_ground_tile("Z2_Lily2", 30 * T, zy + 24 * T, tex_water_lily)
+	_ground_tile("Z2_Rock1", 45 * T, zy + 23 * T, tex_water_rock)
+	_ground_tile("Z2_Splash1", 5 * T, zy + 23 * T, tex_water_splash)
 
 	# Secrets south of river
 	_secret("ch1_grandma_1", "grandma_memory", 16 * T, zy + 26 * T,
@@ -602,6 +629,14 @@ func _build_zone3_commercial():
 	_moving_car("Z3_CB", 29 * T, zy + 10 * T + 4, "blue", tex_car_blue, 45.0, -1)
 	_moving_car("Z3_CK", 46 * T, zy + 9 * T + 4, "black", tex_car_black, 75.0, 1)
 	_fill("Z3_CurbS", 0, zy + 12 * T, MAP_W, T, tex_sidewalk_edge)
+	# Drain grates en el asfalto junto al bordillo (primera fila de carretera)
+	for c in [5, 20, 35, 47]:
+		_ground_tile("Z3_DG_N%d" % c, c * T, zy + 9 * T, tex_drain_grate)
+		_ground_tile("Z3_DG_S%d" % c, c * T, zy + 11 * T, tex_drain_grate)
+	# Bollards en acera junto al paso de cebra (sobre concreto gris, no en bordillo)
+	for c in [14, 17]:
+		_deco_col("Z3_Bol_N%d" % c, c * T, zy + 7 * T, tex_bollard)
+		_deco_col("Z3_Bol_S%d" % c, c * T, zy + 13 * T, tex_bollard)
 
 	# --- ACERA SUR + ENEMIGOS (rows 13-14) ---
 	for c in [9, 33, 49]:

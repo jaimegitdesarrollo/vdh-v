@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1not53n8bjge"
-path="res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"
+uid="uid://wfmaqts1ff0e"
+path="res://.godot/imported/water_fall_mid.png-4c403c5baad90c61772b185485b84cb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/cristian_spritesheet.png"
-dest_files=["res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"]
+source_file="res://assets/sprites/tiles/water_fall_mid.png"
+dest_files=["res://.godot/imported/water_fall_mid.png-4c403c5baad90c61772b185485b84cb5.ctex"]
 
 [params]
 

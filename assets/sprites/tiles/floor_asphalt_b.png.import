@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1not53n8bjge"
-path="res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"
+uid="uid://c1oxwetr8f3vg"
+path="res://.godot/imported/floor_asphalt_b.png-151f11c8b6ecf7eb2fc041ea63024b4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/cristian_spritesheet.png"
-dest_files=["res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"]
+source_file="res://assets/sprites/tiles/floor_asphalt_b.png"
+dest_files=["res://.godot/imported/floor_asphalt_b.png-151f11c8b6ecf7eb2fc041ea63024b4e.ctex"]
 
 [params]
 

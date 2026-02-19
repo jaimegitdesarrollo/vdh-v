@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1not53n8bjge"
-path="res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"
+uid="uid://oh3e53museot"
+path="res://.godot/imported/drain_grate.png-fff80420eaceed6245cfa3efb97ce313.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/cristian_spritesheet.png"
-dest_files=["res://.godot/imported/cristian_spritesheet.png-dd7f56c9dadc484873e18a9a9f66f7e1.ctex"]
+source_file="res://assets/sprites/tiles/drain_grate.png"
+dest_files=["res://.godot/imported/drain_grate.png-fff80420eaceed6245cfa3efb97ce313.ctex"]
 
 [params]
 
